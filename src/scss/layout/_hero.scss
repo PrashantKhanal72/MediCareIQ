@@ -1,0 +1,52 @@
+.spice_hero {
+    height: 600px;
+    position: relative;
+
+    & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .overlay {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        background-color: rgba($color: $gray-100, $alpha: 0.6);
+        mix-blend-mode: hard-light;
+        position: absolute;
+        top: 0;
+    }
+
+    .content {
+        color: $white;
+        position: absolute;
+        @include center("both");
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 90vw;
+
+        br {
+            display: none;
+
+            @include desktop {
+                display: block;
+            }
+        }
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        line-height: 100%;
+        text-align: center;
+        margin-bottom: 1rem;
+        font-family: $serif;
+
+        @include mobile {
+            font-size: 3.5rem;
+        }
+    }
+}

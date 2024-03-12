@@ -1,0 +1,38 @@
+.spice_topbar {
+    background-color: $gray-100;
+    color: $white;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    padding: 4px 1rem;
+
+    .separator {
+        display: inline-block;
+        @include size(4px);
+        border-radius: 50%;
+        background-color: $white;
+    }
+
+    @include mobile {
+        display: flex;
+    }
+}
+
+.navbar {
+    .nav-item {
+        font-size: 14px;
+        font-weight: 500;
+
+        .nav-link {
+            color: $gray-200;
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
+        }
+
+        &.active .nav-link {
+            color: $primary;
+        }
+    }
+}

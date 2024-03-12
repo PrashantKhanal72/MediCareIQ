@@ -1,0 +1,32 @@
+.btn-tray {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    &-center {
+        @include flexCenter;
+    }
+}
+
+.btn {
+    height: 40px;
+    border-radius: 24px;
+    padding: 12px 24px;
+    @include flexCenter;
+    font-family: $sansserif;
+}
+
+.btn-white {
+    @extend .btn;
+    background-color: $white;
+}
+
+.btn-primary {
+    background-color: $primary;
+    border-color: $primary;
+
+    &:hover {
+        background-color: #ac1620;
+        border-color: #ac1620;
+    }
+}

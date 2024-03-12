@@ -1,0 +1,137 @@
+footer {
+    background-color: $gray-200;
+    color: $white;
+    padding: 120px 2rem 80px;
+
+    .footer-keycol {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        .spice_excerpt {
+            font-size: 14px;
+            color: $gray-1100;
+        }
+
+        .spice_socialicons {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 1rem;
+
+            li {
+                @include size(32px);
+                background-color: $white;
+                border-radius: 50%;
+                @include flexCenter;
+
+                a {
+                    color: $gray-100;
+                }
+
+                &:hover {
+                    opacity: 0.85;
+                }
+            }
+
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+    }
+
+    h5 {
+        font-size: 20px;
+        font-weight: bold;
+        color: $white;
+        margin-bottom: 1rem;
+    }
+
+    h6 {
+        font-size: 16px;
+        font-weight: bold;
+        color: $white;
+        margin-bottom: 0.5rem;
+    }
+
+    .general-footer-cols {
+        font-size: 14px;
+        color: $gray-1000;
+
+        a {
+            color: $gray-800;
+        }
+    }
+
+    .business_hours,
+    .footer_address,
+    .footer_contacts {
+        display: flex;
+        flex-direction: column;
+
+        li {
+            padding: 0.8rem 0;
+            border-bottom: 1px dashed $gray-400;
+            display: flex;
+
+            & :first-child {
+                width: 80px;
+            }
+        }
+    }
+
+    .footer_address,
+    .footer_contacts {
+        li {
+            border-bottom: none;
+            padding: 0.8rem 0 0rem;
+            & :first-child {
+                width: 100%;
+            }
+        }
+    }
+
+    .subscribe-box {
+        background-color: $white;
+        border-radius: 48px;
+        width: 100%;
+        max-width: 500px;
+        height: 48px;
+        overflow: hidden;
+        position: relative;
+
+        input {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border: none;
+            height: 100%;
+            border-radius: inherit;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        button {
+            @extend .btn, .btn-primary;
+            color: $white;
+            border-radius: 3rem;
+            position: absolute;
+            top: 50%;
+            right: 4px;
+            transform: translate(0, -50%);
+            border: none;
+        }
+    }
+
+    hr {
+        background-color: $gray-300;
+        margin-top: 3rem;
+    }
+
+    .copyright-box{
+        text-align: center;
+        font-size: 14px;
+        color: $gray-1000;
+    }
+}

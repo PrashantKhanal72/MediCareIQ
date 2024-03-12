@@ -1,0 +1,270 @@
+@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap");
+.section-padding {
+  padding: 80px 2rem;
+}
+
+body {
+  font-family: "Figtree", sans-serif;
+}
+
+.section-title {
+  margin-bottom: 48px;
+}
+.section-title h2 {
+  font-family: "Libre Baskerville, serif";
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 120%;
+}
+@media (min-width: 768px) {
+  .section-title h2 {
+    font-size: 40px;
+  }
+}
+
+.btn-tray {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.btn-tray-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn, footer .subscribe-box button, .btn-white {
+  height: 40px;
+  border-radius: 24px;
+  padding: 12px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Figtree", sans-serif;
+}
+
+.btn-white {
+  background-color: #ffffff;
+}
+
+.btn-primary, footer .subscribe-box button {
+  background-color: #BC1823;
+  border-color: #BC1823;
+}
+.btn-primary:hover, footer .subscribe-box button:hover {
+  background-color: #ac1620;
+  border-color: #ac1620;
+}
+
+.spice_topbar {
+  background-color: #111111;
+  color: #ffffff;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  padding: 4px 1rem;
+}
+.spice_topbar .separator {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #ffffff;
+}
+@media (min-width: 425px) {
+  .spice_topbar {
+    display: flex;
+  }
+}
+
+.navbar .nav-item {
+  font-size: 14px;
+  font-weight: 500;
+}
+.navbar .nav-item .nav-link {
+  color: #222222;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+.navbar .nav-item.active .nav-link {
+  color: #BC1823;
+}
+
+.spice_hero {
+  height: 600px;
+  position: relative;
+}
+.spice_hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.spice_hero .overlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background-color: rgba(17, 17, 17, 0.6);
+  mix-blend-mode: hard-light;
+  position: absolute;
+  top: 0;
+}
+.spice_hero .content {
+  color: #ffffff;
+  position: absolute;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90vw;
+}
+.spice_hero .content br {
+  display: none;
+}
+@media (min-width: 1200px) {
+  .spice_hero .content br {
+    display: block;
+  }
+}
+.spice_hero h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  line-height: 100%;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-family: "Libre Baskerville, serif";
+}
+@media (min-width: 425px) {
+  .spice_hero h1 {
+    font-size: 3.5rem;
+  }
+}
+
+footer {
+  background-color: #222222;
+  color: #ffffff;
+  padding: 120px 2rem 80px;
+}
+footer .footer-keycol {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+footer .footer-keycol .spice_excerpt {
+  font-size: 14px;
+  color: #d3d3d3;
+}
+footer .footer-keycol .spice_socialicons {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+footer .footer-keycol .spice_socialicons li {
+  width: 32px;
+  height: 32px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+footer .footer-keycol .spice_socialicons li a {
+  color: #111111;
+}
+footer .footer-keycol .spice_socialicons li:hover {
+  opacity: 0.85;
+}
+footer h5 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+footer h6 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+footer .general-footer-cols {
+  font-size: 14px;
+  color: #aaaaaa;
+}
+footer .general-footer-cols a {
+  color: #888888;
+}
+footer .business_hours,
+footer .footer_address,
+footer .footer_contacts {
+  display: flex;
+  flex-direction: column;
+}
+footer .business_hours li,
+footer .footer_address li,
+footer .footer_contacts li {
+  padding: 0.8rem 0;
+  border-bottom: 1px dashed #444444;
+  display: flex;
+}
+footer .business_hours li :first-child,
+footer .footer_address li :first-child,
+footer .footer_contacts li :first-child {
+  width: 80px;
+}
+footer .footer_address li,
+footer .footer_contacts li {
+  border-bottom: none;
+  padding: 0.8rem 0 0rem;
+}
+footer .footer_address li :first-child,
+footer .footer_contacts li :first-child {
+  width: 100%;
+}
+footer .subscribe-box {
+  background-color: #ffffff;
+  border-radius: 48px;
+  width: 100%;
+  max-width: 500px;
+  height: 48px;
+  overflow: hidden;
+  position: relative;
+}
+footer .subscribe-box input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: none;
+  height: 100%;
+  border-radius: inherit;
+}
+footer .subscribe-box input:focus {
+  outline: none;
+}
+footer .subscribe-box button {
+  color: #ffffff;
+  border-radius: 3rem;
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  transform: translate(0, -50%);
+  border: none;
+}
+footer hr {
+  background-color: #333333;
+  margin-top: 3rem;
+}
+footer .copyright-box {
+  text-align: center;
+  font-size: 14px;
+  color: #aaaaaa;
+}
+
+/*# sourceMappingURL=main.css.map */
