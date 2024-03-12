@@ -1,19 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap");
-
-$serif: "Libre Baskerville, serif";
-$sansserif: "Figtree", sans-serif;
-
 body {
-    font-family: "Figtree", sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 .section-title {
     margin-bottom: 48px;
     h2 {
-        font-family: $serif;
         font-size: 32px;
         font-weight: bold;
         line-height: 120%;
+        text-align: center;
 
         @include tablet {
             font-size: 40px;

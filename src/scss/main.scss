@@ -7,10 +7,15 @@
 @import "base/normalize";
 @import "base/reset";
 @import "base/typography";
+@import "base/utility";
 
 // components
 @import "components/buttons";
 @import "components/cards";
+@import "components/whyuse";
+@import "components/videoSection";
+@import "components/doctor";
+
 
 // layouts
 @import "layout/header";
