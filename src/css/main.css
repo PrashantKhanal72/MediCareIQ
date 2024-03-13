@@ -1,3 +1,7 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
 .section-padding {
   padding: 80px 2rem;
 }
@@ -330,6 +334,41 @@ body {
     font-size: 18px;
   }
 }
+.userheader-card {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  gap: 1rem;
+  border-radius: 0.4rem;
+}
+.userheader-card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.userheader-grid {
+  display: grid;
+  grid-template-columns: 6fr 3fr 3fr;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.age {
+  font-size: 12px;
+  color: #666;
+}
+
+.metalist {
+  font-size: 14px;
+  margin-top: 1rem;
+}
+.metalist span:first-of-type {
+  color: #666;
+  display: inline-flex;
+  width: 80px;
+}
+
 .navbar-section {
   padding: 0 32px;
   display: flex;
@@ -835,6 +874,11 @@ body {
   .ft-social-links {
     margin: 16px 0 0;
   }
+}
+.home-section h1 {
+  text-align: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -1,14 +1,94 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+
+const ModalComp = function ({ open, onClose, doctorDetails }) {
+  return (
+    <Modal
+      open={open}
+      onClose={onClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box sx={style}>
+        <img
+          src={doctorDetails.img}
+          alt={doctorDetails.name}
+          className="dt-card-img"
+        />
+        <p className="dt-card-name">{doctorDetails.name}</p>
+        <p className="dt-card-title">{doctorDetails.qualification}</p>
+        <p className="dt-card-title">
+          {doctorDetails.yearsOfExperience} years of Experience
+        </p>
+
+        <div className="d-flex">
+          <div>
+            <div>
+              <h3>Education</h3>
+              {doctorDetails.education}
+            </div>
+            <div>
+              <h3>Language Spoken</h3>
+              {doctorDetails.languageSpoken}
+            </div>
+            <div>
+              <h3>NMC Number</h3>
+              {doctorDetails.nmcNumber}
+            </div>
+          </div>
+          <div>
+            <div>
+              <h3>Available Time</h3>
+              {doctorDetails.availableTime &&
+                Object.entries(doctorDetails.availableTime).map(
+                  ([date, times]) => (
+                    <div key={date}>
+                      <p>Date: {date}</p>
+                      <ul>
+                        {times.map((time, index) => (
+                          <Button variant="outlined" key={index}>{time}</Button>
+                        ))}
+                      </ul>
+                    </div>
+                  )
+                )}
+            </div>
+          </div>
+          <p>Click on suitable time to book appointment</p>
+        </div>
+      </Box>
+    </Modal>
+  );
+};
 
 function DoctorCard(props) {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleOpenModal = () => setModalOpen(true);
+  const handleCloseModal = () => setModalOpen(false);
+
   return (
     <div className="dt-card">
       <img src={props.img} alt={props.name} className="dt-card-img" />
       <p className="dt-card-name">{props.name}</p>
-      <p className="dt-card-title">{props.title}</p>
+      <p className="dt-card-title">{props.qualification}</p>
       <p className="dt-card-stars">
         <FontAwesomeIcon
           icon={faStar}
@@ -18,9 +98,17 @@ function DoctorCard(props) {
         <span className="dt-card-reviews"> ({props.reviews}+ Reviews)</span>
         <br />
         <div className="mt-2">
-          <Button variant="outlined">View details</Button>
+          <Button variant="outlined" onClick={handleOpenModal}>
+            View details
+          </Button>
         </div>
       </p>
+
+      <ModalComp
+        open={modalOpen}
+        onClose={handleCloseModal}
+        doctorDetails={props}
+      />
     </div>
   );
 }

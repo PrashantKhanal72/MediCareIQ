@@ -5,25 +5,29 @@ import {
   faBars,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function Navbar() {
   const [nav, setNav] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const navigate = useNavigate();
 
   const openNav = () => {
     setNav(!nav);
   };
 
   const handleChatBtnClick = () => {
-    if (!isButtonDisabled) {
-      toast.info("Experiencing high traffic, Please wait a moment.", {
-        position: toast.POSITION.TOP_CENTER,
-        onOpen: () => setIsButtonDisabled(true),
-        onClose: () => setIsButtonDisabled(false),
-      });
-    }
+    // if (!isButtonDisabled) {
+    //   toast.info("Experiencing high traffic, Please wait a moment.", {
+    //     position: toast.POSITION.TOP_CENTER,
+    //     onOpen: () => setIsButtonDisabled(true),
+    //     onClose: () => setIsButtonDisabled(false),
+    //   });
+  
+    // }
+    navigate('/login')
+    
   };
 
   return (
@@ -47,22 +51,22 @@ function Navbar() {
           </Link>
         </li>
         <li>
-          <a href="#services" className="navbar-links">
+          <a href="/consultnow" className="navbar-links">
             Consult Now
           </a>
         </li>
         <li>
-          <a href="#about" className="navbar-links">
+          <a href="/nearesetlabs" className="navbar-links">
             Nearest Lab Center
           </a>
         </li>
         <li>
-          <a href="#reviews" className="navbar-links">
+          <a href="/healthresources" className="navbar-links">
             Health Resources
           </a>
         </li>
         <li>
-          <a href="#doctors" className="navbar-links">
+          <a href="/reportanalysis" className="navbar-links">
             Report Analysis
           </a>
         </li>
@@ -76,10 +80,9 @@ function Navbar() {
       <button
         className="navbar-btn"
         type="button"
-        disabled={isButtonDisabled}
         onClick={handleChatBtnClick}
       >
-        <FontAwesomeIcon icon={faCommentDots} />  Book Appointment
+        <FontAwesomeIcon icon={faCommentDots} /> Login
       </button>
 
       {/* Mobile */}
@@ -91,37 +94,37 @@ function Navbar() {
         <ul className="mobile-navbar-links">
           <li>
             <Link onClick={openNav} to="/">
-           Home
+              Home
             </Link>
           </li>
           <li>
-            <Link onClick={openNav} to="/bookappointment" >
+            <Link onClick={openNav} to="/bookappointment">
               Book Appointment
-              </Link>
+            </Link>
           </li>
           <li>
-            <a onClick={openNav} href="#services">
-            Consult Now
+            <a onClick={openNav} href="/consultnow">
+              Consult Now
             </a>
           </li>
           <li>
-            <a onClick={openNav} href="#about">
-            Nearest Lab Center
+            <a onClick={openNav} href="/nearesetlabs">
+              Nearest Lab Center
             </a>
           </li>
           <li>
-            <a onClick={openNav} href="#reviews">
-            Health Resources
+            <a onClick={openNav} href="/healthresources">
+              Health Resources
             </a>
           </li>
           <li>
-            <a onClick={openNav} href="#doctors">
-            Report Analysis
+            <a onClick={openNav} href="/reportanalysis">
+              Report Analysis
             </a>
           </li>
           <li>
             <a onClick={openNav} href="#contact">
-            About us
+              About us
             </a>
           </li>
         </ul>
