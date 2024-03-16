@@ -5,29 +5,25 @@ import {
   faBars,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function Navbar() {
   const [nav, setNav] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  const navigate = useNavigate();
 
   const openNav = () => {
     setNav(!nav);
   };
 
   const handleChatBtnClick = () => {
-    // if (!isButtonDisabled) {
-    //   toast.info("Experiencing high traffic, Please wait a moment.", {
-    //     position: toast.POSITION.TOP_CENTER,
-    //     onOpen: () => setIsButtonDisabled(true),
-    //     onClose: () => setIsButtonDisabled(false),
-    //   });
-  
-    // }
-    navigate('/login')
-    
+    if (!isButtonDisabled) {
+      toast.info("Experiencing high traffic, Please wait a moment.", {
+        position: toast.POSITION.TOP_CENTER,
+        onOpen: () => setIsButtonDisabled(true),
+        onClose: () => setIsButtonDisabled(false),
+      });
+    }
   };
 
   return (
@@ -80,6 +76,7 @@ function Navbar() {
       <button
         className="navbar-btn"
         type="button"
+        disabled={isButtonDisabled}
         onClick={handleChatBtnClick}
       >
         <FontAwesomeIcon icon={faCommentDots} /> Login

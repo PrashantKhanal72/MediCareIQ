@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./css/main.css";
+import "./CSS/main.css";
 import Home from "./Pages/Home";
 import BookAppointment from "./Pages/BookAppointment";
 import ConsultNow from "./Pages/ConsultNow";
@@ -11,9 +11,6 @@ import NearestLabs from "./Pages/NearestLabs";
 import LabDetails from "./Components/Labs/Labdetails";
 import ReportAnalysis from "./Pages/ReportAnalysis";
 import UserProfile from "./Pages/UserProfile";
-import LoginPage from "./Pages/LoginPage";
-import Registerpage from "./Pages/Registerpage";
-import AdminPanel from "./Pages/AdminPanel";
 
 function App() {
   return (
@@ -29,9 +26,6 @@ function App() {
           <Route path="/lab/:labId" element={<LabDetails />} />
           <Route path="/reportanalysis" element={<ReportAnalysis />} />
           <Route path="/user/:userId" element={<UserProfile />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<Registerpage />} />
-          <Route path="/admin" element={<AdminPanel />} />
         </Routes>
       </Router>
     </div>
