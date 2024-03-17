@@ -1,51 +1,37 @@
 const pool = require("../../database/db");
+const jwt = require("jsonwebtoken");
 
-const createUser = async (req, res) => {
-  // const { firstName, last_name, email } = req.body;
-  try {
-    const firstName = "roshan";
-    const last_name = "chaudhary";
-    const email = "roshan@gmail.com";
-    // const [rows, fields] = await pool.query('SELECT email FROM users WHERE email = ? LIMIT 1', [email]);
-    // return rows.length > 0;
-    const [result, fields] = await pool.execute(
-      "INSERT INTO users (first_name, last_name, email) VALUES (?, ?, ?)",
-      [firstName, last_name, email]
-    );
-    // const [rows, fields] = await pool.query('SELECT * FROM users');
-    console.log(result);
-    console.log(fields);
-
-    // const newUser =  pool.query("SELECT * FROM users WHERE id = ?", [
-    //   result.insertId,
-    // ]);
-    res.status(201).json({ message: "done" });
-  } catch (error) {
-    console.log(error);
-    res.status(400).send({ message: "Error" });
-  }
-};
 
 const login = async (req, res) => {
-  // const { firstName, last_name, email } = req.body;
+  const { email, password } = req.body;
   try {
-    const firstName = "roshan";
-    const last_name = "chaudhary";
-    const email = "roshan@gmail.com";
-    // const [rows, fields] = await pool.query('SELECT email FROM users WHERE email = ? LIMIT 1', [email]);
-    // return rows.length > 0;
-    const [result, fields] = await pool.execute(
-      "INSERT INTO users (first_name, last_name, email) VALUES (?, ?, ?)",
-      [firstName, last_name, email]
+    const [users] = await pool.execute(
+      "SELECT * FROM users WHERE email = ? LIMIT 1",
+      [email]
     );
-    // const [rows, fields] = await pool.query('SELECT * FROM users');
-    console.log(result);
-    console.log(fields);
 
-    // const newUser =  pool.query("SELECT * FROM users WHERE id = ?", [
-    //   result.insertId,
-    // ]);
-    res.status(201).json({ message: "done" });
+    if (users.length === 0) {
+      return res.status(404).json({ message: "User not registerd" });
+    }
+    // User exists, now compare the password
+    const user = users[0];
+
+    if (password !== user.password) {
+      return res.status(401).json({ message: "Incorrect password" });
+    }
+    console.log(user);
+
+    const token = jwt.sign(
+      {
+        user_id: user.user_id,
+        user_type: user.user_type,
+      },
+      "secretKey",
+      {
+        expiresIn: "10d", // Token expiration time
+      }
+    );
+    res.status(201).json({ token: token });
   } catch (error) {
     console.log(error);
     res.status(400).send({ message: "Error" });
@@ -53,33 +39,37 @@ const login = async (req, res) => {
 };
 
 const register = async (req, res) => {
-  
   try {
-    console.log(req.body)
-    const { first_name, last_name, email,password } = req.body;
-    const response = await pool.query(
-      "SELECT email FROM users WHERE email = ? LIMIT 1",
+    const { first_name, last_name, email, password } = req.body;
+
+    const [users] = await pool.execute(
+      "SELECT * FROM users WHERE email = ? LIMIT 1",
       [email]
     );
-    console.log(response[0])
-    if (response[0].length > 0) {
+
+    if (users.length > 0) {
       return res.status(401).json({ message: "User already registerd" });
     }
     const [result, fields] = await pool.execute(
-      "INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?,?)",
-      [first_name, last_name, email,password]
+      "INSERT INTO users (first_name, last_name, email, password, user_type) VALUES (?, ?, ?,?,?)",
+      [first_name, last_name, email, password, "patient"]
     );
-    const userObject = {
-      user_id: result.user_id,
-      first_name: first_name,
-      last_name: last_name,
-      email: email,
-    };
-    res.status(201).json({ userObject: "userObject" });
+
+    const token = jwt.sign(
+      {
+        user_id: result.insertId,
+        user_type: "patient",
+      },
+      "secretKey",
+      {
+        expiresIn: "10d", // Token expiration time
+      }
+    );
+    res.status(201).json({ token: token });
   } catch (error) {
     console.log(error);
     res.status(400).send({ message: "Error" });
   }
 };
 
-module.exports = { createUser, login, register };
+module.exports = { login, register };
