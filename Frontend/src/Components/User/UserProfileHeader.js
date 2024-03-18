@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Card, Container, CardContent, Stack } from "@mui/material";
+import { Avatar,  Container } from "@mui/material";
 
 const UserProfileHeader = () => {
   return (

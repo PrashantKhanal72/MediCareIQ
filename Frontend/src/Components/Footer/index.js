@@ -1,7 +1,10 @@
 import React from "react";
+// Import the SubscribeNewsletter component for the newsletter subscription form
 import SubscribeNewsletter from "./SubscribeNewsletter";
+// Import Link from react-router-dom for internal navigation
 import { Link } from "react-router-dom";
 
+// Define the footer component
 const index = () => {
   return (
     <div className="footer-section">
@@ -15,13 +18,15 @@ const index = () => {
               healthcare services at your fingertips.
             </p>
           </div>
-
+          {/* Newsletter subscription form component */}
           <SubscribeNewsletter />
         </div>
+        {/* First list in the footer for about, contact, and FAQ */}
         <div className="ft-list">
           <p className="ft-list-title">MedicareIQ</p>
           <ul className="ft-list-items">
             <li>
+            {/* Using Link for internal routing */}
               <Link to={"/legal"}>About us</Link>
             </li>
             <li>
@@ -32,11 +37,12 @@ const index = () => {
             </li>
           </ul>
         </div>
-
+        {/* Second list in the footer for services */}
         <div className="ft-list">
           <p className="ft-list-title">Our Services</p>
           <ul className="ft-list-items">
             <li>
+            {/* Anchor links for internal navigation to services */}
               <a href="#services">Virtual Consultation</a>
             </li>
             <li>
@@ -50,12 +56,12 @@ const index = () => {
             </li>
           </ul>
         </div>
-
+        {/* Third list in the footer for contact information */}
         <div className="ft-list" id="contact">
           <p className="ft-list-title">Get In Touch</p>
           <ul className="ft-list-items">
             <li>
-              <a>Lazimpat Kathmandu</a>
+              <a href="https://maps.app.goo.gl/9jGW8sQg9HZqxfRH9">Lazimpat Kathmandu</a>
             </li>
 
             <li>
@@ -76,8 +82,9 @@ const index = () => {
 
         <ul className="ft-social-links">
           <li>
+          {/* External links to social media platforms with SVG icons */}
             <a
-              href="https://linkedin.com/in/Alkaison/"
+              href="https://linkedin.com"
               title="LinkedIn"
               target="_blank"
               rel="noopener noreferrer"
@@ -111,7 +118,7 @@ const index = () => {
 
           <li>
             <a
-              href="https://x.com/Alkaison/"
+              href="https://x.com/A"
               title="Twitter"
               target="_blank"
               rel="noopener noreferrer"

@@ -1,134 +1,54 @@
+// Importing necessary React components and Material UI components for UI design
 import React from "react";
 import Navbar from "../Components/Navbar/index";
 import Footer from "../Components/Footer";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Divider from "@mui/material/Divider";
+import { Container, Stack, Box } from "@mui/material";
 
-import Avatar from "@mui/material/Avatar";
-import { Container, Stack, Box, Card, CardContent } from "@mui/material";
-import Typography from "@mui/material/Typography";
-
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("2023-05-12", "09:45AM", "CN123456", "John doe"),
-  createData("2023-06-28", "02:30PM", "CN789012", "Jane Smith"),
-  createData("2023-07-15", "11:15AM", "CN345678", "Alex Johnson"),
-  createData("2023-08-02", "04:00PM", "CN901234", "Emily Williams"),
-];
-
-const DoctorProfile = () => {
+// Defining the ConsultNow component
+const ConsultNow = () => {
   return (
-    <>
-      <Navbar />
-      <Container>
-        <Box py={5}>
-          <Stack>
-            <Avatar
-              alt="Remy Sharp"
-              src="https://images.pexels.com/photos/19218034/pexels-photo-19218034/free-photo-of-smiling-doctor-in-a-lab-coat-and-with-a-stethoscope.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              sx={{ width: 120, height: 120 }}
-            />
-            <h5>Dr. John Doe</h5>
-            <p> Gynecologist</p>
+    <div className="home-section">
+      <Navbar /> {/* Displaying the navigation bar at the top */}
+      <h1>Enter Confirmation Number</h1> {/* Section title for entering confirmation number */}
+
+      <Container maxWidth="sm">
+        {/* Container to limit the width of the content */}
+        <Box pb={3}>
+          {/* Box component for spacing */}
+          <Stack spacing={2}>
+            {/* Stack for vertical layout with consistent spacing */}
+            <TextField
+              id="outlined-basic"
+              label="Outlined"
+              variant="outlined"
+            /> {/* Input field for entering the confirmation number */}
+            <Button variant="contained">Start Video Consultation</Button>
+            {/* Button to initiate the video consultation */}
           </Stack>
         </Box>
 
-        <Box py={5}>
-          <h2>Notifications</h2>
-          <Stack gap={1}>
-            <Card variant="outlined">
-              <CardContent>
-                <Typography sx={{ fontSize: 14 }} color="text.secondary">
-                  New patient has booked your time for monday
-                </Typography>
-              </CardContent>
-            </Card>
-            <Card variant="outlined">
-              <CardContent>
-                <Typography sx={{ fontSize: 14 }} color="text.secondary">
-                  New patient has booked your time for monday
-                </Typography>
-              </CardContent>
-            </Card>
+        <Divider /> {/* Visual divider between sections */}
+
+        <Box py={5} >
+          {/* Box component for spacing around the next section */}
+          <Stack spacing={3}>
+            {/* Another Stack for vertical layout with slightly larger spacing */}
+            <p>
+              If you do not have a confirmation number, please book an appointment to
+              consult with a doctor.
+            </p> {/* Informative text */}
+            <Button variant="outlined">Book Appointment</Button>
+            {/* Button to navigate to the appointment booking page */}
           </Stack>
-        </Box>
-
-        <Box py={5}>
-          <h2>Upcoming Consultations</h2>
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Date</TableCell>
-                  <TableCell align="right">Time</TableCell>
-                  <TableCell align="right">Consultation Number</TableCell>
-                  <TableCell align="right">Patient Profile</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row) => (
-                  <TableRow
-                    key={row.name}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      {row.name}
-                    </TableCell>
-                    <TableCell align="right">{row.calories}</TableCell>
-                    <TableCell align="right">{row.fat}</TableCell>
-                    <TableCell align="right">{row.carbs}</TableCell>
-                    <TableCell align="right">{row.protein}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Box>
-
-        <Box py={5}>
-          <h2>Past Consultations</h2>
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Date</TableCell>
-                  <TableCell align="right">Time</TableCell>
-                  <TableCell align="right">Consultation Number</TableCell>
-                  <TableCell align="right">Patient Profile</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row) => (
-                  <TableRow
-                    key={row.name}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      {row.name}
-                    </TableCell>
-                    <TableCell align="right">{row.calories}</TableCell>
-                    <TableCell align="right">{row.fat}</TableCell>
-                    <TableCell align="right">{row.carbs}</TableCell>
-                    <TableCell align="right">{row.protein}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
         </Box>
       </Container>
-      <Footer />
-    </>
+
+      <Footer /> {/* Displaying the footer at the bottom */}
+    </div>
   );
 };
 
-export default DoctorProfile;
+export default ConsultNow;

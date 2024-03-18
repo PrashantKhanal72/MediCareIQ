@@ -6,20 +6,25 @@ import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import { Container, Stack, Box } from "@mui/material";
 
+
+// Define the ReportAnalysis component.
 const ReportAnalysis = () => {
+  // State hook for managing the selected image.
   const [selectedImage, setSelectedImage] = useState(null);
 
+   // Function to handle the change event when a new file is selected.
   const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setSelectedImage(reader.result);
+    const file = event.target.files[0]; // Access the file selected by the user.
+    if (file) { // Check if a file is selected.
+      const reader = new FileReader(); // Create a FileReader to read the file.
+      reader.onload = () => { // Set the onload event handler.
+        setSelectedImage(reader.result); // Update the state with the base64 encoded image.
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file); // Read the file as a data URL.
     }
   };
 
+  // Render the component UI.
   return (
     <div className="home-section">
       <Navbar />

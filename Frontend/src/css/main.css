@@ -1,3 +1,7 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
 .section-padding {
   padding: 80px 2rem;
 }
