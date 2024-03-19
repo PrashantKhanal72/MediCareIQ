@@ -42,7 +42,7 @@ const DoctorList = () => {
         onClose={() => setAddDoctor(false)}
         title="Add Doctor"
       >
-        <AddDoctor />
+        <AddDoctor setIsOpen={setAddDoctor} />
       </AddModal>
     </div>
   );

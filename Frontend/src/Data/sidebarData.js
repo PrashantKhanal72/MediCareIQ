@@ -14,6 +14,10 @@ export const doctorSideBar = [
     title: "Appointment",
     pathname: "/doctor/appointment",
   },
+  {
+    title: "Schedules",
+    pathname: "/schedules",
+  },
 ]
 
 export const userSideBar = [
@@ -23,6 +27,6 @@ export const userSideBar = [
   },
   {
     title: "User Details",
-    pathname: "/user/details",
+    pathname: "/user/detail",
   },
 ]

@@ -20,6 +20,8 @@ import UserPage from "./Pages/UserPage";
 import PaymentPage from "./Pages/PaymentPage";
 import PatientAppointment from "./Pages/PatientAppointment";
 import AdminRoutes from "./Routes/AdminRoutes";
+import DoctorSchedule from "./Pages/DoctorSchedule";
+import UserDetailPage from "./Pages/UserDetailPage";
 
 
 function App() {
@@ -43,8 +45,10 @@ function App() {
           <Route path="/patients" element={<PatientListPage />} />
           <Route path="/doctor/appointment" element={<DoctorAppointment />} />
           <Route path="/patient/doctors" element={<UserPage />} />
-          <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/payment/:scheduleId/:doctorId" element={<PaymentPage />} />
           <Route path="/patient/appointments" element={<PatientAppointment />} />
+          <Route path="/schedules" element={<DoctorSchedule />} />
+          <Route path="/user/detail" element={<UserDetailPage />} />
         </Routes>
       </Router>
     </div>

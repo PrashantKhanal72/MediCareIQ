@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
   doctors: [],
+  schedules: []
 }
 
 const doctorSlices = createSlice({
@@ -12,8 +13,11 @@ const doctorSlices = createSlice({
    setDoctorList: (state, action) => {
       state.doctors = action.payload
    },
+   setScheduleList: (state, action) => {
+      state.schedules = action.payload
+   }
 }})
 
-export const { setDoctorList } = doctorSlices.actions
+export const { setDoctorList, setScheduleList } = doctorSlices.actions
 
 export default doctorSlices.reducer

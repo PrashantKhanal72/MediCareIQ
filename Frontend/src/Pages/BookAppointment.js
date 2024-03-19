@@ -1,5 +1,5 @@
 // Importing necessary React and Material UI components
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../Components/Navbar/index";
 import Doctors from "../Components/Doctor/Doctors";
 import Footer from "../Components/Footer";
@@ -8,9 +8,13 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { useAppDispatch } from "../redux/hook";
+import { getDoctorList } from "../Api/admin";
 
 // Home component definition
 function Home() {
+  
+  const dispatch = useAppDispatch()  // used to dispatch data(state) in redux
   // State for managing the selected specialist type
   const [specialist, setSpecialist] = React.useState("");
 
@@ -18,6 +22,10 @@ function Home() {
   const handleChange = (event) => {
     setSpecialist(event.target.value);
   };
+
+  useEffect(() => {
+    dispatch(getDoctorList());
+  }, []);
 
   // Rendering the home page
   return (

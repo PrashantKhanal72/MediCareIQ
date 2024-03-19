@@ -1,12 +1,9 @@
-import React from "react";
-import { CustomInputField } from "../common/CustomInputField";
 import { useForm } from "react-hook-form";
-import { emailRegex } from "../../Pages/LoginPage";
-import { CustomPasswordField } from "../common/CustomPasswordField";
-import { useAppDispatch } from "../../redux/hook";
-import { createDoctorAccount } from "../../Api/admin";
+import { useAppDispatch } from "../../../redux/hook";
+import { CustomInputField } from "../../common/CustomInputField";
+import { createSchedule } from "../../../Api/doctor";
 
-const AddDoctor = ({setIsOpen}) => {
+const AddSchedule = ({setIsOpen}) => {
   const {
     register,
     handleSubmit,
@@ -16,7 +13,7 @@ const AddDoctor = ({setIsOpen}) => {
   const dispatch = useAppDispatch();
 
   const onSubmit = (data) => {
-     dispatch(createDoctorAccount(data, setIsOpen))
+     dispatch(createSchedule(data, setIsOpen))
   };
 
   return (
@@ -29,73 +26,53 @@ const AddDoctor = ({setIsOpen}) => {
           <div className="flex flex-col w-full gap-4">
             <CustomInputField
               className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
-              type="text"
-              name="first_name"
-              label="First Name"
+              type="date"
+              name="availableDate"
+              label="Available Date"
               labelClass="text-[15px] mb-1 font-medium"
               validation={{
                 required: {
                   value: true,
-                  message: "First Name is required",
+                  message: "Available date is required",
                 },
               }}
               register={register}
               errors={errors}
-              placeholder={"First Name"}
+              placeholder={"Available date"}
             />
-
             <CustomInputField
               className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
-              type="text"
-              name="last_name"
-              label="last Name"
+              type="time"
+              name="startTime"
+              label="Start Time"
               labelClass="text-[15px] mb-1 font-medium"
               validation={{
                 required: {
                   value: true,
-                  message: "last name is required",
+                  message: "Start time is required",
                 },
               }}
               register={register}
               errors={errors}
-              placeholder={"Last Name"}
+              placeholder={"Start Time"}
             />
-
             <CustomInputField
               className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
-              type="email"
-              name="email"
-              label="Email"
+              type="time"
+              name="endTime"
+              label="End Time"
+              labelClass="text-[15px] mb-1 font-medium"
               validation={{
                 required: {
                   value: true,
-                  message: "Email is required",
-                },
-                pattern: {
-                  value: emailRegex,
-                  message: "Invalid Email.",
+                  message: "End time is required",
                 },
               }}
               register={register}
               errors={errors}
-              placeholder={"Email address"}
+              placeholder={"End Time"}
             />
 
-            <CustomPasswordField
-              className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
-              name={"password"}
-              label="Password"
-              validation={{
-                required: {
-                  value: true,
-                  message: "Password is required",
-                },
-              }}
-              errorColor="white"
-              register={register}
-              errors={errors}
-              placeholder={"Password"}
-            />
           </div>
         </div>
 
@@ -112,4 +89,4 @@ const AddDoctor = ({setIsOpen}) => {
   );
 };
 
-export default AddDoctor;
+export default AddSchedule;

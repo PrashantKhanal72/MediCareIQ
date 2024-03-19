@@ -15,13 +15,13 @@ export const getDoctorList = () => {
         }
       }
 
-      export const createDoctorAccount = (data) => {
+      export const createDoctorAccount = (data, setOpen) => {
         return async (dispatch) => {
           try{
           axiosInstance.post(`/admin/create-doctor`, data)
             .then((res) => {
-              // dispatch(getDoctorList())
-              console.log('res', res)
+              dispatch(getDoctorList())
+              setOpen(false)
             }).catch()
           }catch(err){
             console.log('error', err)

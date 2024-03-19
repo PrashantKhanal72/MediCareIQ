@@ -1,10 +1,10 @@
 import TableBody from "@mui/material/TableBody";
 import { styled } from "@mui/material/styles";
 import TableRow from "@mui/material/TableRow";
-import { StyledTableCell } from "../Table/CustomizableTable";
-import { useState } from "react";
-import { useAppDispatch } from "../../redux/hook";
-import { deleteDoctorAccount } from "../../Api/admin";
+import { StyledTableCell } from "../../Table/CustomizableTable";
+import { useAppDispatch } from "../../../redux/hook";
+import moment from "moment";
+import { timeFormatinAMPM } from "../../../utils/timeFormatter";
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
@@ -16,11 +16,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const DoctorTableBody = ({ data }) => {
+const ScheduleTableBody = ({ data }) => {
   const dispatch = useAppDispatch();
 
+  const dummyDate = new Date();
+
   const handleDelete = (row) => {
-    dispatch(deleteDoctorAccount(row.profile_id));
+    //     dispatch(deleteDoctorAccount(row.profile_id));
   };
 
   return (
@@ -33,13 +35,13 @@ const DoctorTableBody = ({ data }) => {
               {data.name}
             </StyledTableCell> */}
               <StyledTableCell align="left">
-                {row?.first_name + " " + row?.last_name}
+                {row?.available_date.split("T")[0]}
               </StyledTableCell>
-              <StyledTableCell align="left">{row.speacilist}</StyledTableCell>
               <StyledTableCell align="left">
-                <button className="py-2 px-4 bg-green-600 rounded-md text-white">
-                  Edit
-                </button>
+                {timeFormatinAMPM(row?.start_time??'')}
+              </StyledTableCell>
+              <StyledTableCell align="left">
+                {timeFormatinAMPM(row?.end_time??'')}
               </StyledTableCell>
               <StyledTableCell align="left">
                 <button
@@ -63,4 +65,4 @@ const DoctorTableBody = ({ data }) => {
   );
 };
 
-export default DoctorTableBody;
+export default ScheduleTableBody;

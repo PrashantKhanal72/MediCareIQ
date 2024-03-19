@@ -54,7 +54,7 @@ const Registerpage = () => {
               <CustomInputField
                 className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
                 type="text"
-                name="first_name"
+                name="blood_pressure"
                 label="First Name"
                 labelClass="text-[15px] mb-1 font-medium"
                 validation={{
