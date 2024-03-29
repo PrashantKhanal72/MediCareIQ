@@ -29,6 +29,7 @@ export const CustomInputField = ({
             className={` focus:outline-none bg-background p-4 text-sm leading-4 placeholder:text-tertiary-colour ${
               errors?.[name]?.message ? "!border-paradise-pink-error !focus:border-paradise-pink-error" : ""
             } ${className}`}
+            step={ type === 'number' ? "0.01" : "1"}
             placeholder={placeholder}
             disabled={disable}
             readOnly={disable}

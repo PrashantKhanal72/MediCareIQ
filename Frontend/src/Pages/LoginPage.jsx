@@ -4,6 +4,7 @@ import { CustomInputField } from "../Components/common/CustomInputField";
 import { CustomPasswordField } from "../Components/common/CustomPasswordField";
 import { Link } from "react-router-dom"; // Component for navigation links
 import { login } from "../Api/auth"; // API function for login
+import Navbar from "../Components/Navbar";
 
 // Regular expression for validating email format
 export const emailRegex =
@@ -25,6 +26,8 @@ const LoginPage = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="w-full h-screen flex items-center justify-center">
       <form
         className="flex gap-[20px] w-full max-w-[440px] bg-[#4065E0] p-6 bg-primary flex-col rounded-2xl"
@@ -101,6 +104,7 @@ const LoginPage = () => {
         </button>
       </form>
     </div>
+    </>
   );
 };
 

@@ -36,6 +36,15 @@ const Registerpage = () => {
 
   // Function to handle form submission
   const onSubmit = (data) => {
+      // const formData = new FormData();
+      // formData.append('first_name',data.first_name)
+      // formData.append('last_name',data.last_name)
+      // formData.append('email',data.email)
+      // formData.append('gender',data.gender)
+      // formData.append('age',data.age)
+      // formData.append('password',data.password)
+      // formData.append('dieseses',data.dieseses)
+       data.age = Number(data.age)
       dispatch(registerUser(data)) // Dispatching action to register user with form data
   }
 
@@ -54,7 +63,7 @@ const Registerpage = () => {
               <CustomInputField
                 className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
                 type="text"
-                name="blood_pressure"
+                name="first_name"
                 label="First Name"
                 labelClass="text-[15px] mb-1 font-medium"
                 validation={{
@@ -134,6 +143,28 @@ const Registerpage = () => {
             />
             </div>
             </div>
+
+            <CustomInputField
+                className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
+                type="text"
+                name="dieseses"
+                label="Diseases"
+                labelClass="text-[15px] mb-1 font-medium"
+                register={register}
+                errors={errors}
+                placeholder={"Diseases"}
+              />
+
+            <CustomInputField
+                className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
+                type="text"
+                name="address"
+                label="Address"
+                labelClass="text-[15px] mb-1 font-medium"
+                register={register}
+                errors={errors}
+                placeholder={"Address"}
+              />
 
             <CustomPasswordField
               className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"

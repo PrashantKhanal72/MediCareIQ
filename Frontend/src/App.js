@@ -22,6 +22,7 @@ import PatientAppointment from "./Pages/PatientAppointment";
 import AdminRoutes from "./Routes/AdminRoutes";
 import DoctorSchedule from "./Pages/DoctorSchedule";
 import UserDetailPage from "./Pages/UserDetailPage";
+import CallDoctors from "./Pages/CallDoctors";
 
 
 function App() {
@@ -42,13 +43,15 @@ function App() {
           <Route path="/register" element={<Registerpage />} />
           <Route path="/admin" element={ <AdminRoutes><DoctorListPage /></AdminRoutes>} />
           <Route path="/video-call" element={<VideoCall />} />
+          <Route path="/calling-doctor/:doctorId/:token" element={<VideoCall />} />
           <Route path="/patients" element={<PatientListPage />} />
           <Route path="/doctor/appointment" element={<DoctorAppointment />} />
           <Route path="/patient/doctors" element={<UserPage />} />
-          <Route path="/payment/:scheduleId/:doctorId" element={<PaymentPage />} />
+          <Route path="/payment" element={<PaymentPage />} />
           <Route path="/patient/appointments" element={<PatientAppointment />} />
           <Route path="/schedules" element={<DoctorSchedule />} />
           <Route path="/user/detail" element={<UserDetailPage />} />
+          <Route path="/call-doctor/:token" element={<CallDoctors />} />
         </Routes>
       </Router>
     </div>

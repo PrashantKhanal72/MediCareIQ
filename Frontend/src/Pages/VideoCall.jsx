@@ -1,8 +1,16 @@
 // VideoCall.js
 import React, { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
+import EndCall from "../Assets/callEnd.png";
+import AcceptCall from "../Assets/accept-call.webp";
+import Mic from "../Assets/mic.png";
+import Navbar from "../Components/Navbar";
+import { useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../redux/hook";
+import { clearToken } from "../Api/payment";
 
-const socket = io("https://appointment-c3wa.onrender.com", {
+// io( url , options )
+export const socket = io("https://appointment-c3wa.onrender.com", {
   path: "/api/v1/socket.io",
   transports: ["websocket"],
   upgrade: false,
@@ -16,6 +24,14 @@ function VidoeCall() {
   const localVideoRef = useRef();
   const remoteVideoRef = useRef();
   const peerConnection = useRef();
+  const [mute, setMute] = useState(true);
+  const dispatch = useAppDispatch();
+
+  const { user } = useAppSelector((state) => state.user);
+
+  console.log("user", user);
+
+  const { doctorId, token } = useParams();
 
   useEffect(() => {
     socket.on("updateOnlineUsers", (users) => {
@@ -23,8 +39,8 @@ function VidoeCall() {
       setOnlineUsers(users);
     });
 
-    socket.on("incomingCall", ({ callerUsername, offer }) => {
-      setIncomingCall({ callerUsername, offer });
+    socket.on("incomingCall", ({ callerUsername, offer, token }) => {
+      setIncomingCall({ callerUsername, offer, token });
     });
 
     socket.on("callAccepted", (answer) => {
@@ -58,9 +74,9 @@ function VidoeCall() {
     };
   }, [username]); // [dependency]
 
-  const handleSetUsername = () => {
-    socket.emit("setUsername", username);
-  };
+  useEffect(() => {
+    handleCallUser(doctorId);
+  }, [doctorId]);
 
   const handleCallUser = async (calleeUsername) => {
     const calleeSocketId = onlineUsers.find(
@@ -90,7 +106,7 @@ function VidoeCall() {
     const offer = await peerConnection.current.createOffer();
     await peerConnection.current.setLocalDescription(offer);
 
-    socket.emit("callUser", { calleeUsername, offer });
+    socket.emit("callUser", { calleeUsername, offer, token });
 
     peerConnection.current.onicecandidate = (event) => {
       if (event.candidate) {
@@ -137,47 +153,92 @@ function VidoeCall() {
     };
 
     setIncomingCall(null);
+    dispatch(clearToken({ token: incomingCall?.token }));
   };
 
   return (
-    <div>
-      <h1>Welcome to Video Calling TestPage</h1>
-
-      <div>
-        <input
-          type="text"
-          placeholder="Enter your username"
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <button onClick={handleSetUsername}>Set Username</button>
-      </div>
-
-      <div>
-        <h2>Online Users</h2>
-        <ul>
+    <>
+      <Navbar />
+      <div className="w-full">
+        <div className="mt-3">
+          {" "}
+          {/* <ul>
           {onlineUsers.map((user, index) => (
             <li key={index}>
-              {user} <button onClick={() => handleCallUser(user)}>Call</button>
+              {user} <button onClick={() => handleCallUser(doctorId)}>Call</button>
             </li>
           ))}
-        </ul>
-        {incomingCall && (
-          <div>
-            <p>Incoming call from {incomingCall.callerUsername}</p>
-            <button onClick={handleAcceptCall}>Accept</button>
+        </ul> */}
+          {incomingCall && (
+            <div className="w-full flex justify-center">
+              {/* <p>Incoming call from {incomingCall.callerUsername}</p> */}
+              <div className="h-12 w-12 flex flex-col items-center gap-4 mt-10">
+                <h2 className="text-[16px] whitespace-nowrap leading-[20px] font-semibold">
+                  Incoming Call
+                </h2>
+                <img
+                  onClick={handleAcceptCall}
+                  src={AcceptCall}
+                  alt="end call"
+                  className="h-full w-full object-fill"
+                />
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="flex flex-1 flex-col px-10  items-center">
+          {remoteVideoRef ? (
+            <div className="h-[400px] rounded-2xl max-w-[800px] bg-black w-full">
+              <video
+                className="h-full w-full rounded-2xl max-w-full"
+                ref={remoteVideoRef}
+                autoPlay
+              ></video>
+            </div>
+          ) : (
+            <div className="h-[450px] rounded-2xl max-w-full bg-gray-300"></div>
+          )}
+        </div>
+        <div className="flex gap-10 mt-1 w-full justify-center items-center">
+          <div className="max-w-[800px] w-full flex items-center justify-between">
+            <div className="flex-1 flex justify-center">
+          <div className="h-12 w-12">
+            <img
+              src={EndCall}
+              alt="end call"
+              className="h-full w-full object-fill"
+            />
           </div>
-        )}
+          </div>
+          <div className="flex flex-col items-center">
+            {/* <h2>Local Video</h2> */}
+            <video
+              className="h-[150px] max-w-full"
+              ref={localVideoRef}
+              autoPlay
+              muted={mute}
+            ></video>
+          </div>
+          </div>
+        </div>
+        <div className="flex gap-8 w-full justify-center mt-10">
+          {/* <div className="h-12 w-12">
+            <img
+              src={EndCall}
+              alt="end call"
+              className="h-full w-full object-fill"
+            />
+          </div> */}
+          {/* <div className="h-12 rounded-full bg-[#b0b0f3] p-2 w-12">
+            <img
+              src={Mic}
+              alt="end call"
+              className="h-full w-full object-fill"
+            />
+          </div> */}
+        </div>
       </div>
-
-      <div>
-        <h2>Local Video</h2>
-        <video ref={localVideoRef} autoPlay muted></video>
-      </div>
-      <div>
-        <h2>Remote Video</h2>
-        <video ref={remoteVideoRef} autoPlay></video>
-      </div>
-    </div>
+    </>
   );
 }
 

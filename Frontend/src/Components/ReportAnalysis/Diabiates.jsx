@@ -1,15 +1,39 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { useForm } from "react-hook-form";
 import { CustomInputField } from "../common/CustomInputField";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { diabiatesAnalysis } from "../../Api/reportAnalysis";
+import { setDiabetesPredict } from "../../redux-slices/reportSlices";
 
-const Diabiates = () => {
+const Diabiates = ({currentTab}) => {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
+  const dispatch = useAppDispatch();
+  const { diabetesPredict } = useAppSelector(state => state.report)
+  const [prediction, setPrediction] = useState('');
 
-  const onSubmit = () => {};
+  const onSubmit = (data) => {
+    dispatch(diabiatesAnalysis(data));
+  };
+
+  console.log('diabi', prediction)
+
+  useEffect(()=> {
+    if(diabetesPredict !== null){
+     if(diabetesPredict === 1) setPrediction('High')
+     else if(diabetesPredict === 0) setPrediction('Low')
+    }else{
+     setPrediction('')
+   }
+ }, [diabetesPredict ])
+
+ useEffect(()=> {
+   if(currentTab !== 3)
+   dispatch(setDiabetesPredict(null))
+ }, [currentTab])
 
   return (
     <div className=" h-full w-full flex flex-col px-12  mt-12">
@@ -18,104 +42,102 @@ const Diabiates = () => {
         onSubmit={handleSubmit(onSubmit)} // Handling form submission
       >
         <div className="flex flex-col gap-3">
-          <div className="flex gap-4">
-            <CustomInputField
-              className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
-              type="text"
-              name="blood_pressure"
-              label="Total Bilirubin"
-              labelClass="text-[15px] mb-1 font-medium"
-              validation={{
-                required: {
-                  value: true,
-                  message: "Blood Pressure is required",
-                },
-              }}
-              register={register}
-              errors={errors}
-              placeholder={"Blood Pressure"}
-            />
-            <CustomInputField
-              className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
-              type="text"
-              name="specific_gravity"
-              label="Direct Bilirubin"
-              labelClass="text-[15px] mb-1 font-medium"
-              validation={{
-                required: {
-                  value: true,
-                  message: "Specific Gravity is required",
-                },
-              }}
-              register={register}
-              errors={errors}
-              placeholder={"Specific Gravity"}
-            />
-          </div>
+          <CustomInputField
+            className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
+            type="number"
+            name="noOfPregnencies"
+            label="No. of Pregnencies"
+            labelClass="text-[15px] mb-1 font-medium"
+            validation={{
+              required: {
+                value: true,
+                message: "No. of Pregnencies is required",
+              },
+            }}
+            register={register}
+            errors={errors}
+            placeholder={"No. of Pregnencies"}
+          />
+          <CustomInputField
+            className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
+            type="number"
+            name="glucoseLevel"
+            label="Glucose Level"
+            labelClass="text-[15px] mb-1 font-medium"
+            validation={{
+              required: {
+                value: true,
+                message: "Glucose Level is required",
+              },
+            }}
+            register={register}
+            errors={errors}
+            placeholder={"Glucose Level"}
+          />
 
           <CustomInputField
             className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
             type="number"
-            name="albunium"
-            label="Alkaline Phosphotase"
+            name="currentBloodPressure"
+            label="Current Blood Pressure"
             labelClass="text-[15px] mb-1 font-medium"
             validation={{
               required: {
                 value: true,
-                message: "Alkaline Phosphotase is required",
+                message: "Current Blood Pressure is required",
               },
             }}
             register={register}
             errors={errors}
-            placeholder={"Alkaline Phosphotase"}
+            placeholder={"Current Blood Pressure"}
           />
           <CustomInputField
             className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
             type="number"
-            name="albunium"
-            label="Alamine Aminotransferase"
+            name="bMI"
+            label="BMI"
             labelClass="text-[15px] mb-1 font-medium"
             validation={{
               required: {
                 value: true,
-                message: "Alamine Aminotransferase is required",
+                message: "BMI is required",
               },
             }}
             register={register}
             errors={errors}
-            placeholder={"Alamine Aminotransferase"}
+            placeholder={"BMI"}
           />
           <CustomInputField
             className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
             type="number"
-            name="albunium"
-            label="Total Protiens"
+            name="diabetesPedigreeFunction"
+            label="Diabetes Pedigree Function"
             labelClass="text-[15px] mb-1 font-medium"
             validation={{
               required: {
                 value: true,
-                message: "Total Protiens is required",
+                message: "Diabetes Pedigree Function is required",
               },
             }}
             register={register}
             errors={errors}
-            placeholder={"Total Protiens"}
+            placeholder={"Diabetes Pedigree Function"}
           />
           <CustomInputField
             className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
             type="number"
-            name="albunium"
-            label="Albumin"
+            name="age"
+            label="Age"
             labelClass="text-[15px] mb-1 font-medium"
             validation={{
               required: {
                 value: true,
-                message: "Albumin is required",
+                message: "Age is required",
               },
             }}
             register={register}
             errors={errors}
-            placeholder={"Albumin"}
+            placeholder={"Age"}
           />
           <CustomInputField
             className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
@@ -148,6 +170,9 @@ const Diabiates = () => {
           </div>
         </button>
       </form>
+      {
+        prediction ? <h1 className={`!py-0 text-[20px] font-semibold ${prediction === 'High' ? 'text-red-600': 'text-yellow-500' }`}>Your chances of getting diesease is {prediction}</h1> : <></>
+      }
     </div>
   );
 };

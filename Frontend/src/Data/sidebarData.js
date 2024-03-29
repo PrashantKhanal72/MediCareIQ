@@ -11,10 +11,6 @@ export const doctorSideBar = [
     pathname: "/patients",
   },
   {
-    title: "Appointment",
-    pathname: "/doctor/appointment",
-  },
-  {
     title: "Schedules",
     pathname: "/schedules",
   },

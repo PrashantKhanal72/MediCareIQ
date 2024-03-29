@@ -35,7 +35,8 @@ export const registerUser = (data) => {
   return async (dispatch) => {
     try {
       // Sends a POST request to the register endpoint with the user's data
-      const res = await axios.post(`${base}/user/register`, data);
+      const res = await axios.post(`${base}/user/register-no-profile`, data 
+      );
       // Calculates the expiration date of the token
 
       // Sets a cookie with the token, expiring when the token expires

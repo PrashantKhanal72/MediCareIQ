@@ -8,6 +8,7 @@ import Modal from "@mui/material/Modal";
 import moment from "moment";
 import { timeFormatinAMPM } from "../../utils/timeFormatter";
 import { useNavigate } from "react-router-dom";
+import { base } from "../../axios/axiosInstance";
 
 // Define the style for the modal box, including its position - center, background, border, and padding
 const style = {
@@ -38,7 +39,7 @@ const ModalComp = function ({ open, onClose, doctorDetails }) {
       <Box sx={style}>
         <div className="min-w-[350px]">
           <img
-            src={doctorDetails?.img ?? ""}
+            src={`https://appointment-c3wa.onrender.com/${doctorDetails?.profileUrl??''}`}
             alt={doctorDetails?.first_name ?? ""}
             className="dt-card-img"
           />
@@ -60,22 +61,24 @@ const ModalComp = function ({ open, onClose, doctorDetails }) {
               <h3>Language Spoken</h3>
               {doctorDetails.languageSpoken}
             </div> */}
-              <div>
-                <h3>Phone Number</h3>
-                {doctorDetails?.nmcNumber ?? ""}
+              <div className="flex gap-1">
+                <h3>Speciality :</h3>
+                <p>{doctorDetails?.speciality || 'None'}</p>
+                
               </div>
             </div>
             <div>
-              <div>
-                <h3>Available Time</h3>
-
-                <h3>{}</h3>
+              <div className="flex gap-1">
+                <h3>Address : </h3>
+                <p>{doctorDetails?.address || 'None'}</p>
+                
               </div>
             </div>
             <p>Click on suitable time to book appointment</p>
           </div>
         </div>
-        <div className="p-4 flex flex-col items-center flex-1">
+        <div className="p-4 flex flex-col justify-between">
+          <div className=" flex flex-col items-center flex-1">
           <h1 className="font-bold !underline-offset-1">
             Available Appointments
           </h1>
@@ -84,13 +87,16 @@ const ModalComp = function ({ open, onClose, doctorDetails }) {
               return (
                 <div className="inline-block p-1">
                   <p className="text-center">{schedule?.available_date.split("T")[0]}</p>
-                  <Button variant="outlined" key={index} onClick={()=> navigate(`/payment/${schedule.schedule_id}/${schedule.doctor_id}`)}>
+                  <Button variant="outlined" key={index}>
                     {`${timeFormatinAMPM(schedule?.start_time)} - ${timeFormatinAMPM(schedule?.end_time)}`}
                   </Button>
                 </div>
               );
             })}
         </div>
+        <Button variant="outlined" onClick={()=> navigate(`/payment`)}>Book Now</Button>
+        </div>
+        
       </Box>
     </Modal>
   );
@@ -107,14 +113,14 @@ function DoctorCard({ doctorDetails }) {
   return (
     <div className="dt-card">
       <img
-        src={doctorDetails?.img ?? ""}
+        src={`https://appointment-c3wa.onrender.com/${doctorDetails?.profileUrl??''}`}
         alt={doctorDetails?.first_name ?? ""}
-        className="dt-card-img"
+        className="dt-card-img !object-cover"
       />
       <p className="dt-card-name">{`${doctorDetails?.first_name ?? ""} ${
         doctorDetails?.last_name ?? ""
       }`}</p>
-      <p className="dt-card-title">{doctorDetails?.qualification ?? ""}</p>
+      <p className="dt-card-title">Speciality: {doctorDetails?.speciality || 'None'}</p>
       {/* <p className="dt-card-stars"> */}
       {/* Display star icons and review count */}
       {/* <FontAwesomeIcon

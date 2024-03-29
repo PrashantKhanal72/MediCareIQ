@@ -1,19 +1,31 @@
 // Importing necessary React components and Material UI components for UI design
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../Components/Navbar/index";
 import Footer from "../Components/Footer";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Divider from "@mui/material/Divider";
 import { Container, Stack, Box } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { useAppDispatch, useAppSelector } from "../redux/hook";
+import { verifyConfirmationNumber } from "../Api/verify";
+import { paymentList } from "../Api/payment";
 
 // Defining the ConsultNow component
 const ConsultNow = () => {
+   const dispatch = useAppDispatch()
+   const { register, handleSubmit } = useForm()
+   const { verifyMessage} = useAppSelector(state => state.user)
+
+   const submitData = (data)=> {
+      dispatch(verifyConfirmationNumber(data))
+   }
+
   return (
     <div className="home-section">
       <Navbar /> {/* Displaying the navigation bar at the top */}
       <h1>Enter Confirmation Number</h1> {/* Section title for entering confirmation number */}
-
+       <form onSubmit={handleSubmit(submitData)}>
       <Container maxWidth="sm">
         {/* Container to limit the width of the content */}
         <Box pb={3}>
@@ -21,11 +33,12 @@ const ConsultNow = () => {
           <Stack spacing={2}>
             {/* Stack for vertical layout with consistent spacing */}
             <TextField
+              {...register('token')}
               id="outlined-basic"
               label="Outlined"
               variant="outlined"
             /> {/* Input field for entering the confirmation number */}
-            <Button variant="contained">Start Video Consultation</Button>
+            <Button type="submit" variant="contained">Start Video Consultation</Button>
             {/* Button to initiate the video consultation */}
           </Stack>
         </Box>
@@ -45,7 +58,7 @@ const ConsultNow = () => {
           </Stack>
         </Box>
       </Container>
-
+      </form>
       <Footer /> {/* Displaying the footer at the bottom */}
     </div>
   );

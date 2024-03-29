@@ -33,25 +33,25 @@ function Home() {
       <Navbar /> {/* Displaying the navigation bar at the top */}
       <h1>Steps to Book Appointment</h1> {/* Section title */}
       {/* Section for general physicians */}
-      <Doctors sectionName={"General Physicians"} />
+      <Doctors doctor_type='Physician' sectionName={"General Physicians"} />
       <hr /> {/* Horizontal rule for visual separation */}
       {/* Section for specialist doctors, with dynamic specialist selection */}
-      <Doctors sectionName={"Specialist"}>
-        <h2> specialist button</h2>
+      <Doctors doctor_type={'Specialist'} sectionName={"Specialist"}>
+        {/* <h2> specialist button</h2>
         <div>
           <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Specialist</InputLabel>
+              <InputLabel id="demo-simple-select-label">Specialist</InputLabel> */}
               {/* Dropdown for selecting a specialist type */}
-              <Select
+              {/* <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={specialist}
                 label="Age"
                 onChange={handleChange}
-              >
+              > */}
                 {/* Options for different types of specialists */}
-                <MenuItem value={"Nephrologist"}>Nephrologist</MenuItem>
+                {/* <MenuItem value={"Nephrologist"}>Nephrologist</MenuItem>
                 <MenuItem value={"Gastoenterologist"}>Gastoenterologist</MenuItem>
                 <MenuItem value={"Gynecologist"}>Gynecologist</MenuItem>
                 <MenuItem value={"Dietician"}>Dietician</MenuItem>
@@ -59,7 +59,7 @@ function Home() {
               </Select>
             </FormControl>
           </Box>
-        </div>
+        </div> */}
       </Doctors>
       <Footer /> {/* Displaying the footer at the bottom */}
     </div>

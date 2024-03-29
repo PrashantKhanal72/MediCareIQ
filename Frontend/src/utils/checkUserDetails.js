@@ -4,6 +4,6 @@ export const checkUserDetails = (users) => {
   } else if (users.user_type === "doctor") {
     return (window.location.href = "/patients");
   } else {
-    return (window.location.href = "/patient/doctors");
+    return (window.location.href = "/patient/appointments");
   }
 };

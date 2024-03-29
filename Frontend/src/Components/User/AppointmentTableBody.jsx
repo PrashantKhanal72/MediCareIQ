@@ -21,8 +21,10 @@ const AppointmentTableBody = ({data}) => {
             {/* <StyledTableCell component="th" scope="row">
               {data.name}
             </StyledTableCell> */}
-            <StyledTableCell align="left">{row.name}</StyledTableCell>
-            <StyledTableCell align="left">{row.time}</StyledTableCell>
+            <StyledTableCell align="left">{row?.token??""}</StyledTableCell>
+            <StyledTableCell align="left">{row.created_at?.split('T')[0]??''}</StyledTableCell>
+            <StyledTableCell align="left">{row.specialist_call === 1 ? 'Yes' : 'No'}</StyledTableCell>
+            <StyledTableCell align="left">{row.physician_call === 1 ? 'Yes' : 'No'}</StyledTableCell>
           </StyledTableRow>
         ))}
       </TableBody>

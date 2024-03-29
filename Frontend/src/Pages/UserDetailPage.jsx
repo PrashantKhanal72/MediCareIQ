@@ -6,9 +6,10 @@ import { useAppDispatch } from "../redux/hook";
 import { getUserProfile } from "../Api/user";
 
 const UserDetailPage = () => {
-        const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
-      dispatch(getUserProfile())
+    dispatch(getUserProfile());
   }, []);
 
   return (

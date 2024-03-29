@@ -20,7 +20,7 @@ const DoctorTableBody = ({ data }) => {
   const dispatch = useAppDispatch();
 
   const handleDelete = (row) => {
-    dispatch(deleteDoctorAccount(row.profile_id));
+    dispatch(deleteDoctorAccount(row.auth_id));
   };
 
   return (
@@ -35,7 +35,8 @@ const DoctorTableBody = ({ data }) => {
               <StyledTableCell align="left">
                 {row?.first_name + " " + row?.last_name}
               </StyledTableCell>
-              <StyledTableCell align="left">{row.speacilist}</StyledTableCell>
+              <StyledTableCell align="left">{row?.speciality??''}</StyledTableCell>
+              <StyledTableCell align="left">{row?.gender??''}</StyledTableCell>
               <StyledTableCell align="left">
                 <button className="py-2 px-4 bg-green-600 rounded-md text-white">
                   Edit

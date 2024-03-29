@@ -6,8 +6,12 @@ import DoctorProfileData from "../../Data/doctor";
 import { useAppSelector } from "../../redux/hook";
 
 // Define the Doctors component with props
-function Doctors({ sectionName, children }) {
+function Doctors({ sectionName, children, doctor_type }) {
   const { doctors } = useAppSelector((state) => state.doctor);
+
+  const filteredDoctor = doctors?.filter((item)=> {
+     return item.doctor_type === doctor_type
+  })
 
   return (
     <div className="doctor-section" id="doctors">
@@ -23,7 +27,7 @@ function Doctors({ sectionName, children }) {
       {children}
       <div className="dt-cards-content">
         {/* Iterate over DoctorProfileData to render a DoctorCard for each doctor */}
-        {doctors.map((doctor, index) => {
+        {filteredDoctor.map((doctor, index) => {
           return (
             <DoctorCard
               key={index}

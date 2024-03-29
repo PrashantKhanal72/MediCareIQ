@@ -2,7 +2,9 @@ import { createSlice } from "@reduxjs/toolkit"
 
 
 const initialState = {
-  user: {}
+  user: null,
+  verifyMessage: '',
+  paymentList: []
 }
 
 const userSlices = createSlice({
@@ -12,8 +14,14 @@ const userSlices = createSlice({
    setUser: (state, action) => {
       state.user = action.payload
    },
+   setVerifyMessage: (state, action) => {
+      state.verifyMessage = action.payload
+   },
+   setPaymentList: (state, action) => {
+      state.paymentList = action.payload
+   },
 }})
 
-export const { setUser } = userSlices.actions
+export const { setUser, setVerifyMessage, setPaymentList } = userSlices.actions
 
 export default userSlices.reducer

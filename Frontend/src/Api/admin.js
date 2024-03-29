@@ -18,7 +18,11 @@ export const getDoctorList = () => {
       export const createDoctorAccount = (data, setOpen) => {
         return async (dispatch) => {
           try{
-          axiosInstance.post(`/admin/create-doctor`, data)
+          axiosInstance.post(`/admin/create-doctor`, data, {
+            headers: {
+              "Content-Type" : "multi-part/form-data"
+            }
+          })
             .then((res) => {
               dispatch(getDoctorList())
               setOpen(false)
@@ -35,7 +39,9 @@ export const getDoctorList = () => {
           axiosInstance.delete(`/admin/delete-doctor/${dataId}`)
             .then((res) => {
               dispatch(getDoctorList())
-            }).catch()
+            }).catch((err)=> {
+              console.log('err', err)
+            })
           }catch(err){
             console.log('error', err)
           }

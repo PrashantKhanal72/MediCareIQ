@@ -14,6 +14,9 @@ const heading = [
     title: "Specialist",
   },
   {
+    title: "Gender",
+  },
+  {
     title: "",
   },
   {

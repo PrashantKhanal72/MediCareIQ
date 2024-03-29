@@ -1,9 +1,9 @@
 import React from "react";
-import {  Container } from "@mui/material";
+import { Container } from "@mui/material";
 import { useAppSelector } from "../../redux/hook";
 
 const UserProfileHeader = () => {
-  const { user } = useAppSelector(state => state.user)
+  const { user } = useAppSelector((state) => state.user);
 
   return (
     <Container>
@@ -15,27 +15,24 @@ const UserProfileHeader = () => {
           /> */}
 
           <div className="userheader-card-content">
-            <h5>{`${user.first_name} ${user.first_name}`}</h5>
+            <h5>{`${user?.first_name ?? ""} ${user?.last_name}`}</h5>
             <span className="age">34 year</span>
             <div className="metalist">
               <p>
-                <span>Email</span> <span>{user.email}</span>
+                <span>Email</span> <span>{user?.email ?? ""}</span>
               </p>
               <p>
-                <span>Address</span> <span>Lokanthali, Bhaktapur</span>
+                <span>Age</span> <span>{user?.age ?? ""}</span>
               </p>
               <p>
-                <span>Phone</span> <span>98163298362</span>
+                <span>Address</span> <span>{user?.address ?? ""}</span>
               </p>
               <p>
-              <span>Gender</span> <span>Male</span>
-            </p>
-            <p>
-              <span>Allergies</span> <span>Honey, Milk</span>
-            </p>
-            <p>
-              <span>Diseases</span> <span>Type A Diabetes</span>
-            </p>
+                <span>Gender</span> <span>{user?.gender??''}</span>
+              </p>
+              <p>
+                <span>Dieseses</span> <span>{user?.dieseses??''}</span>
+              </p>
             </div>
           </div>
         </div>

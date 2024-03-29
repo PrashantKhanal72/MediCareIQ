@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCommentDots,
@@ -7,11 +7,23 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { setLogin } from "../../redux-slices/authSlices";
+import { getUserProfile } from "../../Api/user";
+import UserProfile from '../../Assets/user-512.png';
+import { checkUserDetails } from "../../utils/checkUserDetails";
+import { socket } from "../../Pages/VideoCall";
 
 function Navbar() {
   const [nav, setNav] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const navigate = useNavigate()
+  const token = Cookies.get("token");
+
+  const { user } = useAppSelector(state => state.user)
+  const dispatch = useAppDispatch()
 
   const openNav = () => {
     setNav(!nav);
@@ -27,6 +39,24 @@ function Navbar() {
     // }
     navigate('/login')
   };
+
+  const handleRouting= (e) => {
+    e.preventDefault()
+    checkUserDetails(user)
+  }
+
+  useEffect(()=> {
+    if(user && user.email){
+      socket.emit("setUsername", user?.profile_id);
+    }
+  }, [user?.email])
+  
+  useEffect(()=> {
+    if(token){
+      dispatch(getUserProfile());
+    }
+  },[token])
+
 
   return (
     <div className="navbar-section">
@@ -75,14 +105,20 @@ function Navbar() {
         </li>
       </ul>
 
-      <button
+     { (user && user?.profile_id) ? <div onClick={(e)=> handleRouting(e)} className="flex gap-2 items-center hover:cursor-pointer pr-5">
+      <div className="h-[40px] w-[40px]">
+      <img src={UserProfile} alt="img" className="h-full rounded-full border-[1px] border-black w-full" />
+      </div>
+         <p>{user?.first_name??''}</p>
+     </div>: 
+     <button
         className="navbar-btn"
         type="button"
         disabled={isButtonDisabled}
         onClick={handleChatBtnClick}
       >
         <FontAwesomeIcon icon={faCommentDots} /> Login
-      </button>
+      </button>}
 
       {/* Mobile */}
       <div className={`mobile-navbar ${nav ? "open-nav" : ""}`}>
