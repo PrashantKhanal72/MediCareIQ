@@ -4,10 +4,12 @@ const secretKey = "secretKey";
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
+
   if (authHeader) {
     //const token = authHeader.split(" ")[1];
     //token should be used
     jwt.verify(authHeader, "secretKey", (err, user) => {
+      console.log(user);
       if (err) {
         return res.sendStatus(403); // Forbidden
       }
@@ -28,6 +30,7 @@ const isAdmin = (req, res, next) => {
 
   try {
     const decodedToken = jwt.verify(token, secretKey);
+
     if (decodedToken.user_type === "admin") {
       // If the user is an admin, proceed to the next middleware or route handler.
       next();
@@ -43,6 +46,7 @@ const isAdmin = (req, res, next) => {
 const getUserIdFromToken = (token) => {
   try {
     const decoded = jwt.verify(token, "secretKey");
+    
     return decoded.userId;
   } catch (err) {
     return null;
