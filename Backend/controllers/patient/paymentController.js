@@ -1,15 +1,15 @@
 const pool = require("../../database/db");
+const axios = require("axios");
 
 const payForCall = async (req, res) => {
   const profile_id = req.user.profile_id;
   const { amount } = req.body;
 
   try {
-    const axios = require("axios");
-
+ 
     const data = {
-      return_url: "https://dev.hiresmart.ai/",
-      website_url: "https://dev.hiresmart.ai/",
+      return_url: "http://localhost:3000/success",
+      website_url: "http://localhost:3000/",
       amount: "1000",
       purchase_order_id: "afadsfasdf",
       purchase_order_name: "asdfasdfasdf",
@@ -42,7 +42,7 @@ const payForCall = async (req, res) => {
 };
 
 const getPaymentList = async (req, res) => {
-  try {
+  try { 
     const profile_id = req.user.profile_id;
 
     const [rows] = await pool.execute(
@@ -53,7 +53,7 @@ const getPaymentList = async (req, res) => {
     if (rows.length > 0) {
       res.status(200).json(rows);
     } else {
-      res.status(404).json({ message: "No payments found for this patient" });
+      res.status(200).json([]);
     }
   } catch (error) {
     res.status(500).json({ error: error.message });

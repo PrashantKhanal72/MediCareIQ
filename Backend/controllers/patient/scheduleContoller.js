@@ -15,6 +15,15 @@ const bookSchedule = async ( req,res ) => {
       return res.status(404).json({ message: 'Schedule not available for booking' });
     }
 
+
+    // const [doctor_patient] = await pool.execute(
+    //   `INSERT INTO doctor_patient (
+    //     doctor_id,
+    //     patient_id
+    //   ) VALUES (?,?)`,
+    //   [profile_id, patient_id]
+    // );
+
     res.json({ message: 'Schedule booked successfully' });
   } catch (error) {
     console.log(error);

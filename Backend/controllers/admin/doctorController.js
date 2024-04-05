@@ -38,12 +38,13 @@ const createDoctor = async (req, res) => {
     const {
       first_name,
       last_name,
-      email, 
+      email,
       password,
       gender,
       age,
       address,
-      speciality
+      speciality,
+      doctor_type
     } = req.body;
 
     console.log(req.file);
@@ -75,8 +76,9 @@ const createDoctor = async (req, res) => {
         gender,
         age,
         address,
-        speciality
-        ) VALUES (?,?,?,?,?,?,?,?,?,?)`,
+        speciality,
+        doctor_type
+        ) VALUES (?,?,?,?,?,?,?,?,?,?,?)`,
       [
         newUser.insertId,
         req.file.path,
@@ -88,6 +90,7 @@ const createDoctor = async (req, res) => {
         age,
         address,
         speciality,
+        doctor_type
       ]
     );
 
@@ -110,6 +113,7 @@ const updateDoctorProfile = async (req, res) => {
     age,
     address,
     speciality,
+    doctor_type
   } = req.body;
 
   try {
@@ -122,7 +126,8 @@ const updateDoctorProfile = async (req, res) => {
       gender = ?,
       age = ?,
       address = ?,
-      speciality = ?
+      speciality = ?,
+      doctor_type = ?
       WHERE profile_id = ?`;
     const [result] = await pool.execute(query, [
       auth_id,
@@ -134,6 +139,7 @@ const updateDoctorProfile = async (req, res) => {
       age,
       address,
       speciality,
+      doctor_type,
       id,
     ]);
 
@@ -155,13 +161,11 @@ const deleteDoctor = async (req, res) => {
   try {
     const query = "DELETE FROM profile WHERE auth_id = ?";
     const [result] = await pool.execute(query, [id]);
-    
+
     const [response] = await pool.execute(
       "DELETE FROM auth WHERE user_id = ?",
       [id]
     );
-
-
 
     if (result.affectedRows > 0 && response.affectedRows > 0) {
       res.status(200).send({ message: "Profile deleted successfully" });
