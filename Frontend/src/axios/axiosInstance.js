@@ -3,7 +3,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 // Defines the base URL for all API requests
-export const base = "https://appointment-c3wa.onrender.com/api/v1";
+export const base = "http://localhost:3001/api/v1";
 
 export const fastApiUrl = "http://127.0.0.1:8000/api/v1";
 // Instance for fast api request handle

@@ -20,8 +20,9 @@ const payForCall = async (req, res) => {
       data,
       {
         headers: {
-          Authorization: "Key dcf686e684d246c9b7433df5df7cb7f0",
+          Authorization: "Key ab096ad365914bbd9983e0e8f8c2396c0",
           "Content-Type": "application/json",
+          
         },
       }
     );
