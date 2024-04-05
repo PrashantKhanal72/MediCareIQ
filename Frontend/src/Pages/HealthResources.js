@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 
@@ -11,8 +11,15 @@ import {
   Box
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
+import { useAppDispatch } from "../redux/hook";
+import { getResourcesList } from "../Api/lab";
 
 const HealthResources = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(()=> {
+   dispatch(getResourcesList())
+  }, [])
   return (
     <>
       <Navbar />

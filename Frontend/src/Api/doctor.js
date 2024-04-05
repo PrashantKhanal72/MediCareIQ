@@ -1,5 +1,6 @@
 import axiosInstance from "../axios/axiosInstance";
-import { setScheduleList } from "../redux-slices/doctorSlices";
+import { setPatientList, setScheduleList } from "../redux-slices/doctorSlices";
+import { getPrescriptionList } from "./user";
 
 export const createSchedule = (data, setOpen) => {
   return async (dispatch) => {
@@ -8,6 +9,22 @@ export const createSchedule = (data, setOpen) => {
         .post(`/doctor/create-schedule`, data)
         .then((res) => {
           dispatch(getScheduleList());
+          setOpen(false);
+        })
+        .catch();
+    } catch (err) {
+      console.log("error", err);
+    }
+  };
+};
+
+export const createPrescription = (data, setOpen) => {
+  return async (dispatch) => {
+    try {
+      axiosInstance
+        .post(`/doctor/prescribe`, data)
+        .then((res) => {
+          dispatch(getPrescriptionList());
           setOpen(false);
         })
         .catch();
@@ -30,3 +47,18 @@ export const getScheduleList = () => {
       });
   };
 };
+
+export const getPatientListByDocotor = () => {
+  return async (dispatch) => {
+    axiosInstance
+      .get(`/doctor/get-patient-list`)
+      .then((res) => {
+        dispatch(setPatientList(res?.data?.patients));
+      })
+      .catch((err) => {
+        console.log('err', err)
+      });
+  };
+};
+
+

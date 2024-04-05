@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { CustomInputField } from "../common/CustomInputField";
 import { CustomDropDownSelect } from "../common/CustomDropDownSelect";
@@ -8,10 +8,11 @@ import {
   fastingBloodSugar,
   restingElectroCardiographic,
 } from "./heartData";
-import { useAppDispatch } from "../../redux/hook";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { heartAnalysis } from "../../Api/reportAnalysis";
+import { setHeartPredict } from "../../redux-slices/reportSlices";
 
-const Heart = () => {
+const Heart = ({currentTab}) => {
   const dispatch = useAppDispatch();
   const {
     register,
@@ -20,10 +21,29 @@ const Heart = () => {
     setValue,
     clearErrors,
   } = useForm();
+  const { diabetesPredict } = useAppSelector(state => state.report)
+
+  const [prediction, setPrediction] = useState('');
 
   const onSubmit = (data) => {
      dispatch(heartAnalysis(data))
   };
+
+  useEffect(()=> {
+    if(diabetesPredict !== null){
+     if(diabetesPredict === 1) setPrediction('High')
+     else if(diabetesPredict === 0) setPrediction('Low')
+    }else{
+     setPrediction('')
+   }
+ }, [diabetesPredict ])
+
+
+// This is used to clear the prediction once the page is changed.
+ useEffect(()=> {
+   if(currentTab !== 5)
+   dispatch(setHeartPredict(null))   
+ }, [currentTab])
 
   return (
     <div className=" h-full w-full flex flex-col px-12  mt-12">
@@ -34,7 +54,7 @@ const Heart = () => {
         <div className="flex flex-col gap-3">
           <CustomDropDownSelect
             register={register}
-            name={"chest_pain_type"}
+            name={"totalBilirubin"}
             labelClass="!text-[15px] !font-medium mb-1"
             setValue={setValue}
             className="!rounded-r-lg !text-[13px] leading-[18px]"
@@ -51,7 +71,7 @@ const Heart = () => {
           <CustomInputField
             className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
             type="number"
-            name="rest_blood_pressure"
+            name="directBilirubin"
             label="Resting Blood Pressure"
             labelClass="text-[15px] mb-1 font-medium"
             validation={{
@@ -68,7 +88,7 @@ const Heart = () => {
           <CustomInputField
             className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
             type="number"
-            name="serum_cholestoral"
+            name="alkalinePhosphotase"
             label="Serum Cholestoral"
             labelClass="text-[15px] mb-1 font-medium"
             validation={{
@@ -81,10 +101,26 @@ const Heart = () => {
             errors={errors}
             placeholder={"Serum Cholestoral"}
           />
+          <CustomInputField
+            className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
+            type="number"
+            name="totalProtiens"
+            label="Total Proteins"
+            labelClass="text-[15px] mb-1 font-medium"
+            validation={{
+              required: {
+                value: true,
+                message: "Total Protein is required",
+              },
+            }}
+            register={register}
+            errors={errors}
+            placeholder={"Serum Cholestoral"}
+          />
 
           <CustomDropDownSelect
             register={register}
-            name={"fasting_blood_sugar"}
+            name={"alamineAminotransferase"}
             labelClass="!text-[15px] !font-medium mb-1"
             setValue={setValue}
             className="!rounded-r-lg !text-[13px] leading-[18px]"
@@ -100,7 +136,7 @@ const Heart = () => {
 
           <CustomDropDownSelect
             register={register}
-            name={"restingElectroCardiographic"}
+            name={"albuminGlobulinRatio"}
             labelClass="!text-[15px] !font-medium mb-1"
             setValue={setValue}
             className="!rounded-r-lg !text-[13px] leading-[18px]"
@@ -116,7 +152,7 @@ const Heart = () => {
 
           <CustomDropDownSelect
             register={register}
-            name={"restingElectroCardiographic"}
+            name={"albumin"}
             labelClass="!text-[15px] !font-medium mb-1"
             setValue={setValue}
             className="!rounded-r-lg !text-[13px] leading-[18px]"
@@ -144,6 +180,9 @@ const Heart = () => {
           </div>
         </button>
       </form>
+      {
+        prediction ? <h1 className={`!py-0 text-[20px] font-semibold ${prediction === 'High' ? 'text-red-600': 'text-yellow-500' }`}>Your chances of getting diesease is {prediction}</h1> : <></>
+      }
     </div>
   );
 };

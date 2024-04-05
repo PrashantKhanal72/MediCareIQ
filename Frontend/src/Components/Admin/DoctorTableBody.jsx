@@ -5,6 +5,8 @@ import { StyledTableCell } from "../Table/CustomizableTable";
 import { useState } from "react";
 import { useAppDispatch } from "../../redux/hook";
 import { deleteDoctorAccount } from "../../Api/admin";
+import AddModal from "../modal/AddModal";
+import UpdateDoctor from "./UpdateDoctor";
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
@@ -18,9 +20,16 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const DoctorTableBody = ({ data }) => {
   const dispatch = useAppDispatch();
+  const [updateDoctor, setUpdateDoctor] = useState(false);
+  const [updateData, setUpdateData] = useState(null);
 
   const handleDelete = (row) => {
     dispatch(deleteDoctorAccount(row.auth_id));
+  };
+
+  const handleEdit = (row) => {
+    setUpdateData(row);
+    setUpdateDoctor(row);
   };
 
   return (
@@ -35,10 +44,17 @@ const DoctorTableBody = ({ data }) => {
               <StyledTableCell align="left">
                 {row?.first_name + " " + row?.last_name}
               </StyledTableCell>
-              <StyledTableCell align="left">{row?.speciality??''}</StyledTableCell>
-              <StyledTableCell align="left">{row?.gender??''}</StyledTableCell>
               <StyledTableCell align="left">
-                <button className="py-2 px-4 bg-green-600 rounded-md text-white">
+                {row?.speciality ?? ""}
+              </StyledTableCell>
+              <StyledTableCell align="left">
+                {row?.gender ?? ""}
+              </StyledTableCell>
+              <StyledTableCell align="left">
+                <button
+                  onClick={() => handleEdit(row)}
+                  className="py-2 px-4 bg-green-600 rounded-md text-white"
+                >
                   Edit
                 </button>
               </StyledTableCell>
@@ -53,13 +69,14 @@ const DoctorTableBody = ({ data }) => {
             </StyledTableRow>
           ))}
       </TableBody>
-      {/* <AddModal
-        open={addDoctor}
-        onClose={() => setAddDoctor(false)}
-        title="Add Doctor"
+      {/* The form to update doctor */}
+      <AddModal
+        open={updateDoctor}
+        onClose={() => setUpdateDoctor(false)}
+        title="Update Doctor"
       >
-        <AddDoctor />
-      </AddModal> */}
+        <UpdateDoctor updateData={updateData} setIsOpen={setUpdateDoctor} />
+      </AddModal>
     </>
   );
 };

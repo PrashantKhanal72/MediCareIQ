@@ -19,8 +19,6 @@ const Diabiates = ({currentTab}) => {
     dispatch(diabiatesAnalysis(data));
   };
 
-  console.log('diabi', prediction)
-
   useEffect(()=> {
     if(diabetesPredict !== null){
      if(diabetesPredict === 1) setPrediction('High')

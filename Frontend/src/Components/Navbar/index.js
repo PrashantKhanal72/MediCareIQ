@@ -15,6 +15,7 @@ import { getUserProfile } from "../../Api/user";
 import UserProfile from '../../Assets/user-512.png';
 import { checkUserDetails } from "../../utils/checkUserDetails";
 import { socket } from "../../Pages/VideoCall";
+import Toast from "../common/Toast";
 
 function Navbar() {
   const [nav, setNav] = useState(false);
@@ -59,6 +60,7 @@ function Navbar() {
 
 
   return (
+    <>
     <div className="navbar-section">
       <h1 className="navbar-title">
         <Link to="/">
@@ -174,6 +176,8 @@ function Navbar() {
         />
       </div>
     </div>
+    <Toast/>
+    </>
   );
 }
 

@@ -48,9 +48,6 @@ axiosInstance.interceptors.response.use(
   },
   function (error) {
     if (error && error.response) {
-      if (error.response.status === 401) {
-        window.location.href = "/";
-      }
       console.log('err', error)
     }
 

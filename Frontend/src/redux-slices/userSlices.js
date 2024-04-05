@@ -4,7 +4,8 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
   user: null,
   verifyMessage: '',
-  paymentList: []
+  paymentList: [],
+  prescriptionList: []
 }
 
 const userSlices = createSlice({
@@ -20,8 +21,11 @@ const userSlices = createSlice({
    setPaymentList: (state, action) => {
       state.paymentList = action.payload
    },
+   setPrescription: (state, action) => {
+      state.prescriptionList = action.payload
+   },
 }})
 
-export const { setUser, setVerifyMessage, setPaymentList } = userSlices.actions
+export const { setUser, setVerifyMessage, setPaymentList, setPrescription } = userSlices.actions
 
 export default userSlices.reducer

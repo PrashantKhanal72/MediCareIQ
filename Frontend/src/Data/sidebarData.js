@@ -25,4 +25,8 @@ export const userSideBar = [
     title: "User Details",
     pathname: "/user/detail",
   },
+  {
+    title: "Doctor Prescription",
+    pathname: "/prescription",
+  },
 ]

@@ -152,15 +152,21 @@ function VidoeCall() {
       }
     };
 
-    setIncomingCall(null);
-    dispatch(clearToken({ token: incomingCall?.token }));
+    // setIncomingCall(null);
+    dispatch(
+      clearToken({
+        token: incomingCall?.token,
+        patient_id: incomingCall?.callerUsername,
+      })
+    );
   };
+  
 
   return (
     <>
       <Navbar />
       <div className="w-full">
-        <div className="mt-3">
+        <div className="mt-2">
           {" "}
           {/* <ul>
           {onlineUsers.map((user, index) => (
@@ -172,7 +178,7 @@ function VidoeCall() {
           {incomingCall && (
             <div className="w-full flex justify-center">
               {/* <p>Incoming call from {incomingCall.callerUsername}</p> */}
-              <div className="h-12 w-12 flex flex-col items-center gap-4 mt-10">
+              <div className="h-12 w-12 flex items-center gap-4 mt-2 mb-1">
                 <h2 className="text-[16px] whitespace-nowrap leading-[20px] font-semibold">
                   Incoming Call
                 </h2>
@@ -180,45 +186,43 @@ function VidoeCall() {
                   onClick={handleAcceptCall}
                   src={AcceptCall}
                   alt="end call"
-                  className="h-full w-full object-fill"
+                  className="h-full w-full hover:cursor-pointer object-fill"
                 />
               </div>
             </div>
           )}
         </div>
         <div className="flex flex-1 flex-col px-10  items-center">
-          {remoteVideoRef ? (
-            <div className="h-[400px] rounded-2xl max-w-[800px] bg-black w-full">
+          {/* {remoteVideoRef ? ( */}
+            <div className="h-[400px] max-w-[800px]  w-full">
               <video
-                className="h-full w-full rounded-2xl max-w-full"
+                className="h-full w-full max-w-full"
                 ref={remoteVideoRef}
                 autoPlay
               ></video>
             </div>
-          ) : (
-            <div className="h-[450px] rounded-2xl max-w-full bg-gray-300"></div>
-          )}
+          {/* )  */}
         </div>
         <div className="flex gap-10 mt-1 w-full justify-center items-center">
           <div className="max-w-[800px] w-full flex items-center justify-between">
             <div className="flex-1 flex justify-center">
-          <div className="h-12 w-12">
-            <img
-              src={EndCall}
-              alt="end call"
-              className="h-full w-full object-fill"
-            />
-          </div>
-          </div>
-          <div className="flex flex-col items-center">
-            {/* <h2>Local Video</h2> */}
-            <video
-              className="h-[150px] max-w-full"
-              ref={localVideoRef}
-              autoPlay
-              muted={mute}
-            ></video>
-          </div>
+              <div className="h-12 w-12">
+                <img
+                  src={EndCall}
+                  alt="end call"
+                  className="h-full w-full object-fill"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col items-center">
+              {/* <h2>Local Video</h2> */}
+              <video
+                className="h-[150px] max-w-full"
+                ref={localVideoRef}
+                autoPlay
+                muted={mute}
+              ></video>
+            </div>
           </div>
         </div>
         <div className="flex gap-8 w-full justify-center mt-10">

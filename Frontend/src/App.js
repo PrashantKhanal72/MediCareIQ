@@ -23,6 +23,8 @@ import AdminRoutes from "./Routes/AdminRoutes";
 import DoctorSchedule from "./Pages/DoctorSchedule";
 import UserDetailPage from "./Pages/UserDetailPage";
 import CallDoctors from "./Pages/CallDoctors";
+import Prescription from "./Pages/Prescription";
+import Success from "./Pages/Success";
 
 
 function App() {
@@ -51,7 +53,9 @@ function App() {
           <Route path="/patient/appointments" element={<PatientAppointment />} />
           <Route path="/schedules" element={<DoctorSchedule />} />
           <Route path="/user/detail" element={<UserDetailPage />} />
+          <Route path="/prescription" element={<Prescription />} />
           <Route path="/call-doctor/:token" element={<CallDoctors />} />
+          <Route path="/success" element={<Success/>} />
         </Routes>
       </Router>
     </div>

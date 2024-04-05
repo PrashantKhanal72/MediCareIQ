@@ -47,6 +47,7 @@ const DoctorList = () => {
       >
         <AddDoctor setIsOpen={setAddDoctor} />
       </AddModal>
+
     </div>
   );
 };

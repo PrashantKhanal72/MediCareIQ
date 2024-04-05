@@ -16,7 +16,7 @@ function Hero() {
 
   // Function to navigate to the appointment page when the button is clicked
   const handleBookAppointmentClick = () => {
-    navigate("/appointment");
+    navigate("/bookappointment");
   };
 
   // useEffect hook to add and remove a scroll event listener

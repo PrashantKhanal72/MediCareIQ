@@ -5,6 +5,8 @@ import moment from "moment";
 import Cookies from "js-cookie";
 import { setLogin } from "../redux-slices/authSlices";
 import { checkUserDetails } from "../utils/checkUserDetails";
+import { toast } from "react-toastify";
+import { success } from "../redux-slices/toastSlices";
 
 // axios is library
 
@@ -22,6 +24,7 @@ export const login = (data) => {
       // Sets a cookie with the token, expiring when the token expires
       Cookies.set("token", res.data.token, { expires: exp });
       // Redirects the user to the home page
+      dispatch(success("Login Successfully"))
       dispatch(setLogin({ userId: decode.user_id, role: decode.user_type }));
       checkUserDetails(decode);
     } catch (err) {

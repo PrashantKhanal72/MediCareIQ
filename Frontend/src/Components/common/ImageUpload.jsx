@@ -7,14 +7,21 @@ const ImageUpload = ({
   register,
   name,
   watch,
+  image
 }) => {
   const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
-    if (watch(name) && watch(name).length > 0) {
+    if ( watch(name) && watch(name).length > 0) {
       setImageUrl(URL.createObjectURL(watch(name)[0]));
     }
   }, [watch(name)]);
+
+  useEffect(()=> {
+     if(image){
+      setImageUrl(image)
+     }
+  },[image])
 
   return (
     <div className="px-[34px] flex flex-col gap-2 justify-center items-center py-6">
