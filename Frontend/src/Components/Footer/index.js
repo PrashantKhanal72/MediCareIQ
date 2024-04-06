@@ -21,22 +21,7 @@ const index = () => {
           {/* Newsletter subscription form component */}
           <SubscribeNewsletter />
         </div>
-        {/* First list in the footer for about, contact, and FAQ */}
-        <div className="ft-list">
-          <p className="ft-list-title">MedicareIQ</p>
-          <ul className="ft-list-items">
-            <li>
-            {/* Using Link for internal routing */}
-              <Link to={"/legal"}>About us</Link>
-            </li>
-            <li>
-              <Link to={"/legal"}>Contact us</Link>
-            </li>
-            <li>
-              <Link to={"/legal"}>FAQ</Link>
-            </li>
-          </ul>
-        </div>
+        
         {/* Second list in the footer for services */}
         <div className="ft-list">
           <p className="ft-list-title">Our Services</p>

@@ -160,8 +160,7 @@ function VidoeCall() {
       })
     );
   };
-  
-
+  console.log('incoming Call', incomingCall)
   return (
     <>
       <Navbar />

@@ -41,7 +41,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://medi-care-fdfq17ets-prashant-khanals-projects-c1532b4c.vercel.app",
+      "https://medi-care-iq.vercel.app",
       "*",
     ],
     credentials: true,
