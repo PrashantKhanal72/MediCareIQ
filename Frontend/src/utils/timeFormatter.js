@@ -6,7 +6,7 @@ export const timeFormatinAMPM = (time) => {
   console.log(times)
   if(times.length > 0 && times[0] > 11 ){
         return `${times[0]%12}:${times[1]} pm`
-  }else if(times.length > 0 && times[0] < 11 ){
+  }else if(times.length > 0 && times[0] <= 11 ){
        return `${times[0]}:${times[1]} am`
   }
 }
