@@ -20,7 +20,7 @@ function VidoeCall() {
   const [username, setUsername] = useState("");
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [incomingCall, setIncomingCall] = useState(null);
-  const [callerUsername, setCallerUsername] = useState("");
+  const [showIncomingCall, setShowIncoimgCall] = useState(false);
   const localVideoRef = useRef();
   const remoteVideoRef = useRef();
   const peerConnection = useRef();
@@ -41,6 +41,7 @@ function VidoeCall() {
 
     socket.on("incomingCall", ({ callerUsername, offer, token }) => {
       setIncomingCall({ callerUsername, offer, token });
+      setShowIncoimgCall(true)
     });
 
     socket.on("callAccepted", (answer) => {
@@ -152,7 +153,7 @@ function VidoeCall() {
       }
     };
 
-    // setIncomingCall(null);
+    setShowIncoimgCall(false)
     dispatch(
       clearToken({
         token: incomingCall?.token,
@@ -160,7 +161,10 @@ function VidoeCall() {
       })
     );
   };
+
   console.log('incoming Call', incomingCall)
+  
+
   return (
     <>
       <Navbar />
@@ -174,7 +178,7 @@ function VidoeCall() {
             </li>
           ))}
         </ul> */}
-          {incomingCall && (
+          {showIncomingCall && (
             <div className="w-full flex justify-center">
               {/* <p>Incoming call from {incomingCall.callerUsername}</p> */}
               <div className="h-12 w-12 flex items-center gap-4 mt-2 mb-1">

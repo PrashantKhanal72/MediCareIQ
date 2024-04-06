@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 import { setLogin } from "../redux-slices/authSlices";
 import { checkUserDetails } from "../utils/checkUserDetails";
 import { toast } from "react-toastify";
-import { success } from "../redux-slices/toastSlices";
+import { error, success } from "../redux-slices/toastSlices";
 
 // axios is library
 
@@ -28,7 +28,11 @@ export const login = (data) => {
       dispatch(setLogin({ userId: decode.user_id, role: decode.user_type }));
       checkUserDetails(decode);
     } catch (err) {
-      console.log("error", err);
+      if(err?.response && err?.response?.data ){
+        dispatch(error(err?.response?.data?.message??''))
+      }else{
+        dispatch(error('Something went wrong'))
+      }
     }
   };
 };

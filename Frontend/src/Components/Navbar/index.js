@@ -100,11 +100,6 @@ function Navbar() {
             Report Analysis
           </a>
         </li>
-        <li>
-          <a href="#doctors" className="navbar-links">
-            About us
-          </a>
-        </li>
       </ul>
 
      { (user && user?.profile_id) ? <div onClick={(e)=> handleRouting(e)} className="flex gap-2 items-center hover:cursor-pointer pr-5">

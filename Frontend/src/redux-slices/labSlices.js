@@ -3,17 +3,18 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
   labs: [],
+  resources: []
 }
 
 const labSlices = createSlice({
-  name: "doctor",
+  name: "lab",
   initialState,
   reducers: {
    setLabList: (state, action) => {
       state.labs = action.payload
    },
    setResourceList: (state, action) => {
-      state.labs = action.payload
+      state.resources = action.payload
    }
 }})
 
