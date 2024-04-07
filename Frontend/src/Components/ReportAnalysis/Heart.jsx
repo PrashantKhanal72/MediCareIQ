@@ -21,7 +21,7 @@ const Heart = ({currentTab}) => {
     setValue,
     clearErrors,
   } = useForm();
-  const { diabetesPredict } = useAppSelector(state => state.report)
+  const { heartPredict } = useAppSelector(state => state.report)
 
   const [prediction, setPrediction] = useState('');
 
@@ -30,13 +30,13 @@ const Heart = ({currentTab}) => {
   };
 
   useEffect(()=> {
-    if(diabetesPredict !== null){
-     if(diabetesPredict === 1) setPrediction('High')
-     else if(diabetesPredict === 0) setPrediction('Low')
+    if(heartPredict !== null){
+     if(heartPredict === 1) setPrediction('High')
+     else if(heartPredict === 0) setPrediction('Low')
     }else{
      setPrediction('')
    }
- }, [diabetesPredict ])
+ }, [heartPredict ])
 
 
 // This is used to clear the prediction once the page is changed.

@@ -37,8 +37,8 @@ const Fracture = ({currentTab}) => {
 
   useEffect(()=> {
     if(fracturePredict !== null){
-     if(fracturePredict === 1) setPrediction('High')
-     else if(fracturePredict === 0) setPrediction('Low')
+     if(fracturePredict > 0.5) setPrediction('High')
+     else if(fracturePredict <= 0.5) setPrediction('Low')
     }else{
      setPrediction('')
    }
