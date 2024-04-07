@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { clearToken } from "../Api/payment";
 
 // io( url , options )
-export const socket = io("https://appointment-c3wa.onrender.com", {
+export const socket = io("https://backend-medicare-9rf2.onrender.com", {
   path: "/api/v1/socket.io",
   transports: ["websocket"],
   upgrade: false,
