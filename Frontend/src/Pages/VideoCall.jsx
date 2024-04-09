@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 import EndCall from "../Assets/callEnd.png";
 import AcceptCall from "../Assets/accept-call.webp";
-import Mic from "../Assets/mic.png";
 import Navbar from "../Components/Navbar";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
@@ -161,9 +160,9 @@ function VidoeCall() {
       })
     );
   };
+   console.log('incomingCall', incomingCall)
+  // console.log('showIncoming', showIncomingCall)
 
-  console.log('incoming Call', incomingCall)
-  
 
   return (
     <>
@@ -178,7 +177,7 @@ function VidoeCall() {
             </li>
           ))}
         </ul> */}
-          {showIncomingCall && (
+          {incomingCall && (
             <div className="w-full flex justify-center">
               {/* <p>Incoming call from {incomingCall.callerUsername}</p> */}
               <div className="h-12 w-12 flex items-center gap-4 mt-2 mb-1">

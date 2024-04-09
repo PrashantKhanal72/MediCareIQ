@@ -1,37 +1,17 @@
+// Import the mysql2 library with promise support.
 const mysql = require("mysql2/promise");
 
-// const pool = mysql.createPool({
-//   host: "localhost",
-//   user: "dev_user",
-//   database: "my_dev_db",
-//   password: "password",
-//   waitForConnections: true,
-//   connectionLimit: 10,
-//   queueLimit: 0,
-// });
-
-// mysql -u dev_user -p my_dev_db
-
-// const pool = mysql.createPool({
-//   host: "sql6.freesqldatabase.com",
-//   port: "3306",
-//   user: "sql6693707",
-//   database: "sql6693707",
-//   password: "LPqvHXRuCc",
-//   waitForConnections: true,
-//   connectionLimit: 10,
-//   queueLimit: 0,
-// });
-
+// Create a connection pool with configuration settings.
 const pool = mysql.createPool({
-  host: 'localhost',
+  host: 'localhost', // MySQL server host
   port:'3306',
   user: 'root', 
   database: 'my_dev_db',
   password: '', 
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
+  waitForConnections: true, // Wait for connections if all are busy
+  connectionLimit: 10, // Maximum number of connections in the pool
+  queueLimit: 0 // Maximum number of queued requests (0 for no limit)
 });
 
+// Export the pool for use in other parts of the application.
 module.exports = pool;

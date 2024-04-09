@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import Modal from "@mui/material/Modal";
-import YouTube from 'react-youtube';
 import {
   Container,
   Card,
@@ -14,6 +13,7 @@ import {
 import Grid from "@mui/material/Grid";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { getResourcesList } from "../Api/lab";
+import { Link } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -31,7 +31,7 @@ const style = {
 
 const ModalComp = function ({ open, onClose, openDetails }) {
   if (!openDetails) return <></>;
-
+  console.log(openDetails ?? "");
   return (
     <Modal
       open={open} // Controls if the modal is open or closed
@@ -41,11 +41,46 @@ const ModalComp = function ({ open, onClose, openDetails }) {
     >
       <Box sx={style}>
         <div className=" flex flex-col items-center w-full justify-center">
-          <h2 className="dt-card-name">{`${openDetails[0]?.Name ?? ""}`}</h2>
+          <h2 className="dt-card-name ">{`${openDetails[0]?.Name ?? ""}`}</h2>
 
-            <div>
-              
+          <div className="w-full flex justify-center my-2  gap-2 items-center">
+            <h1 className="text-[16px] font-semibold">Video : </h1>{" "}
+            <Link
+              className="underline text-blue-500"
+              to={openDetails[0]?.Video ?? ""}
+            >
+              {openDetails[0]?.Video ?? ""}
+            </Link>
+          </div>
+
+          <div class="grid w-full grid-cols-2 gap-4">
+            <div className="flex flex-col gap-2">
+              <h3 className="font-semibold text-center">
+                What the test is about?{" "}
+              </h3>
+              <p>{openDetails[0]?.Description ?? ""} </p>
             </div>
+            <div className="flex flex-col gap-2 ">
+              <h3 className="font-semibold text-center">
+                How to prepare for test?{" "}
+              </h3>
+              <p>{openDetails[0]?.Preparation ?? ""} </p>
+            </div>
+            <div className="flex flex-col gap-2">
+              <h3 className="font-semibold text-center">
+                How the test is done?{" "}
+              </h3>
+              <p className="text-left">
+                {openDetails[0]?.HowIsTestDone ?? ""}{" "}
+              </p>
+            </div>
+            <div className="flex flex-col gap-2">
+              <h3 className="font-semibold text-center">
+                How long does the test results take?{" "}
+              </h3>
+              <p className="text-left">{openDetails[0]?.ResultTiming ?? ""} </p>
+            </div>
+          </div>
         </div>
       </Box>
     </Modal>
