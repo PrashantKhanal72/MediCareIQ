@@ -1,37 +1,39 @@
 //node uploadLabData.js => to populate the database
 const  pool  = require("./database/db");
 
-
+// Function to insert lab and test data into the database.
 async function insertLabData(labData) {
-  const connection = await pool.getConnection();
+  const connection = await pool.getConnection(); // Get a database connection from the pool.
 
   try {
-    for (const lab of labData) {
-      // Insert lab details
+    for (const lab of labData) { // Iterate through each lab in the provided lab data.
+      // Insert each lab's details into the 'lab' table.
       const labResult = await connection.execute(
         "INSERT INTO lab (Name, Location, PhoneNumber, OpeningHours) VALUES (?, ?, ?, ?)",
         [lab.name, lab.location, lab.phoneNumber, lab.openingHours]
       );
-      const labId = labResult[0].insertId;
+      const labId = labResult[0].insertId;  // Retrieve the inserted lab's ID for linking with tests.
 
-      // Insert available tests for the lab
+      // Iterate through each test associated with the current lab.
       for (const test of lab.availableTests) {
+        // Insert each test's details into the 'test' table.
         await connection.execute(
           "INSERT INTO test (LabID, TestName, TestPrice, Description) VALUES (?, ?, ?, ?)",
           [labId, test.testName, test.testPrice, test.description]
         );
       }
     }
-
+    // Commit the transaction to save the changes to the database.
     await connection.commit();
   } catch (error) {
-    console.error("Failed to insert lab data:", error);
-    await connection.rollback();
+    console.error("Failed to insert lab data:", error); // Log any errors encountered during the process.
+    await connection.rollback(); // Rollback the transaction in case of an error.
   } finally {
-    connection.release();
+    connection.release(); // Release the database connection back to the pool.
   }
 }
 
+// Array containing sample data for labs and their respective tests to be inserted into the database.
 const labData = [
   {
     id: 1,
@@ -204,7 +206,7 @@ const labData = [
   // Add more labs and tests as needed
 ];
 
-// Use the function with your labData
+// Call the insertLabData function with the predefined labData array and handle the promise response.
 insertLabData(labData)
-  .then(() => console.log("Lab data successfully inserted"))
-  .catch((error) => console.error("Error inserting lab data:", error));
+  .then(() => console.log("Lab data successfully inserted")) // Log success message.
+  .catch((error) => console.error("Error inserting lab data:", error)); // Log any errors.

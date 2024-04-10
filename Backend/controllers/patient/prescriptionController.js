@@ -1,9 +1,11 @@
 const pool = require("../../database/db");
 
+// Function to fetch all prescriptions for the logged-in patient.
 const fetchMyPrescription = async (req, res) => {
   try {
-    const profile_id = req.user.profile_id;
+    const profile_id = req.user.profile_id; // Get the patient's profile ID from the authenticated user.
 
+    // Execute a SQL query to fetch prescriptions and doctor details for the patient.
     const [result] = await pool.execute(
       `SELECT p.*, d.profile_id AS doctor_profile_id, d.first_name AS doctor_first_name, d.last_name AS doctor_last_name, d.email AS doctor_email, d.speciality AS doctor_speciality
         FROM prescription AS p
@@ -15,6 +17,7 @@ const fetchMyPrescription = async (req, res) => {
     
     
     console.log(result);
+    
     res.status(200).json({ prescriptions: result });
   } catch (error) {
     res.status(500).json({ error: error.message });

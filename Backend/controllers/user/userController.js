@@ -1,31 +1,35 @@
 const pool = require("../../database/db");
-const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken"); // Used for generating and verifying JSON Web Tokens (JWT).
 
+//Authenticates users and provides a JWT for session management.
 const login = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password } = req.body;  // Extract email and password from request body.
 
   try {
-    const [users] = await pool.execute(
+    const [users] = await pool.execute( // Query the database for a user with the provided email.
       "SELECT * FROM auth WHERE email = ? LIMIT 1",
       [email]
     );
 
-    if (users.length === 0) {
+    if (users.length === 0) { // Check if user exists.
       return res.status(404).json({ message: "User not registerd" });
     }
     // User exists, now compare the password
+    // Get the user object.
     const user = users[0];
 
-    if (password !== user.password) {
+    if (password !== user.password) {  // Compare the provided password with the stored one.
       return res.status(401).json({ message: "Incorrect password" });
     }
     console.log(user);
-    const [profile] = await pool.execute(
+    const [profile] = await pool.execute( // Retrieve the user's profile.
       "SELECT * FROM profile WHERE auth_id = ? LIMIT 1",
       [user.user_id]
     );
 
     console.log(profile[0]);
+
+    // Generate a JWT with user information.
     const token = jwt.sign(
       {
         user_id: user.user_id,
@@ -34,7 +38,7 @@ const login = async (req, res) => {
       },
       "secretKey",
       {
-        expiresIn: "10d", // Token expiration time
+        expiresIn: "10d", // Token expires in 10 days.
       }
     );
 
@@ -45,6 +49,8 @@ const login = async (req, res) => {
   }
 };
 
+
+// Registers a new user and automatically creates a profile.
 const register = async (req, res) => {
   try {
     const {
@@ -60,6 +66,8 @@ const register = async (req, res) => {
 
     console.log(req.file);
 
+    // Check if the email is already registered.
+
     const [users] = await pool.execute(
       "SELECT * FROM auth WHERE email = ? LIMIT 1",
       [email]
@@ -68,11 +76,13 @@ const register = async (req, res) => {
     if (users.length > 0) {
       return res.status(401).json({ message: "User already registerd" });
     }
+    // Insert a new user into the 'auth' table.
     const [newUser] = await pool.execute(
       "INSERT INTO auth (email, password, user_type) VALUES (?, ?, ?)",
       [email, password, "patient"]
     );
 
+     // Insert a new profile linked to the new user.
     const [profileResponse] = await pool.execute(
       `INSERT INTO profile (
       auth_id,
@@ -99,6 +109,8 @@ const register = async (req, res) => {
         dieseses,
       ]
     );
+
+    // Generate a JWT for the new user.
     const token = jwt.sign(
       {
         user_id: newUser.insertId,
@@ -191,11 +203,12 @@ const registerNoProfile = async (req, res) => {
   }
 };
 
+// Retrieves the profile information for the authenticated user.
 const getProfile = async (req, res) => {
   try {
-    const user_id = req.user.user_id;
+    const user_id = req.user.user_id; // Get user ID from the authenticated user.
 
-    const [profile] = await pool.execute(
+    const [profile] = await pool.execute( // Retrieve the user's profile from the database.
       "SELECT * FROM profile WHERE auth_id = ?",
       [user_id]
     );

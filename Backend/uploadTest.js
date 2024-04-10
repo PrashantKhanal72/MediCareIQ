@@ -1,26 +1,28 @@
 const pool = require("./database/db");
 
+// Asynchronous function to upload blood sugar test data to the database.
 async function uploadBloodSugarTestData(data) {
-  const connection = await pool.getConnection();
+  const connection = await pool.getConnection();  // Acquire a connection from the pool.
   
   try {
-    await connection.beginTransaction();
+    await connection.beginTransaction(); // Start a new transaction.
 
-    // Insert into Tests table
+     // Insert test information into the Tests table.
     const [testResult] = await connection.query(
       `INSERT INTO Tests (Description, ResultTiming) VALUES (?, ?)`,
       [data.Description, data.ResultTiming]
     );
-
+    
+    // Retrieve the insert ID for the new test.
     const testId = testResult.insertId;
 
-    // Insert into TestProcedure table
+    // Insert procedure details into the TestProcedure table.
     await connection.query(
       `INSERT INTO TestProcedure (TestID, HowIsTestDone, Preparation) VALUES (?, ?, ?)`,
       [testId, data.Procedure.HowIsTestDone, data.Procedure.Preparation]
     );
 
-    // Insert into ResultsInterpretation table
+     // Insert result interpretation details into the ResultsInterpretation table.
     for (const interpretation of data.ReadingInterpretation.Table) {
       await connection.query(
         `INSERT INTO ResultsInterpretation (TestID, TestCondition, FastingBloodSugar, PostprandialBloodSugar) VALUES (?, ?, ?, ?)`,
@@ -33,22 +35,22 @@ async function uploadBloodSugarTestData(data) {
       );
     }
 
-    // Insert into PreventionAndCure table
+    // Insert prevention and cure information into the PreventionAndCure table.
     await connection.query(
       `INSERT INTO PreventionAndCure (TestID, Prevention, Cure) VALUES (?, ?, ?)`,
       [testId, data.PreventionAndCure.Prevention, data.PreventionAndCure.Cure]
     );
 
-    await connection.commit();
+    await connection.commit(); // Commit the transaction to save the changes
   } catch (error) {
-    await connection.rollback();
-    throw error;
+    await connection.rollback(); // Roll back the transaction on error.
+    throw error; // Rethrow the error to handle it in the calling function.
   } finally {
-    connection.release();
+    connection.release(); // Release the database connection back to the pool.
   }
 }
 
-// Example usage with the provided data
+// Example data object for the blood sugar test to demonstrate how the upload function is used.
 const bloodSugarTestData = {
   Description:
     "A blood sugar test measures the amount of glucose in your blood. This test is used to diagnose and manage diabetes.",
@@ -86,6 +88,8 @@ const bloodSugarTestData = {
   },
 };
 
+
+// Invoke the upload function with the sample data, handling the promise to log success or failure.
 uploadBloodSugarTestData(bloodSugarTestData)
   .then(() => {
     console.log("Data uploaded successfully.");
