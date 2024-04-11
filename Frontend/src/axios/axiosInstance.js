@@ -6,7 +6,8 @@ import Cookies from "js-cookie";
 export const base = "https://backend-medicare-9rf2.onrender.com/api/v1";
 
 export const fastApiUrl = "http://127.0.0.1:8000/api/v1";
-// Instance for fast api request handle
+
+// Axios Instance setup for fast api request handle
 export const fastInstance = axios.create({
    baseURL: fastApiUrl,
    headers: {
@@ -15,19 +16,19 @@ export const fastInstance = axios.create({
    }
 })
 
-// Creates a new Axios instance with a base URL and default headers for JSON requests
+// Main Axios instance for regular backend with JSON preferences
 const axiosInstance = axios.create({
-  baseURL: base, // The base URL for all requests made using this instance
+  baseURL: base, // Sets the base URL for this instance
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json; charset=utf-8",
   },
 });
 
-// Adds a request interceptor to the Axios instance
+// Request interceptor to add a token to every request if it exists
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = Cookies.get("token");
+    const token = Cookies.get("token"); // Retrieves token from cookies
     if (token) {
       // If a token is found, it's appended to the Authorization header of the request
       config.headers = {
@@ -35,18 +36,20 @@ axiosInstance.interceptors.request.use(
         Authorization: token,
       };
     }
-    return config; // Returns the modified config to be used for the request
+    return config; // Returns the updated configuration for the HTTP request
   },
   (error) => {
-    Promise.reject(error);
+    Promise.reject(error); // Handles any request error
   }
 );
 
+// Response interceptor for logging and handling errors globally
 axiosInstance.interceptors.response.use(
   (response) => {
-    return response;
+    return response; // Passes on the response if no errors
   },
   function (error) {
+     // Log and reject the promise if an error occurs
     if (error && error.response) {
       console.log('err', error)
     }
@@ -55,14 +58,14 @@ axiosInstance.interceptors.response.use(
   }
 );
 
-// Adds a response interceptor to the Axios instance
+// Additional response interceptor for handling authentication errors
 axiosInstance.interceptors.response.use(
   (response) => {
-    // For successful responses, just passes the response through
+    // Directly returns the response for successful requests
     return response;
   },
   function (error) {
-    // Checks for unauthorized access (401 status code) in error responses
+    // Redirects to home if a 401 unauthorized error occurs
     if (error.response && error.response.status === 401) {
       // If found, redirects the user to the home page for re-authentication
       // window.location.href = "/";

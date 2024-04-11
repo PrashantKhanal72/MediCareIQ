@@ -47,6 +47,7 @@ const Heart = ({currentTab}) => {
 
   return (
     <div className=" h-full w-full flex flex-col px-12  mt-12">
+    <p>Coronary artery disease (CAD) is a condition where the narrowing of coronary arteries restricts blood flow to the heart muscle, potentially leading to heart attacks or other cardiovascular complications.</p>
       <form
         className="flex gap-[20px] w-full max-w-[1000px] p-6 bg-primary flex-col rounded-2xl"
         onSubmit={handleSubmit(onSubmit)} // Handling form submission
@@ -65,7 +66,7 @@ const Heart = ({currentTab}) => {
             label={"Chest Pain Type"}
             dropdown={chestPainType}
             errors={errors}
-            placeholder="Select Chest Pain Type"
+            placeholder=" Select Chest pain type."
           />
 
           <CustomInputField
@@ -82,7 +83,7 @@ const Heart = ({currentTab}) => {
             }}
             register={register}
             errors={errors}
-            placeholder={"Resting Blood Pressure"}
+            placeholder={"Resting systolic Blood Pressure in mm Hg. Range: 94 to 200 mm Hg"}
           />
 
           <CustomInputField
@@ -99,7 +100,7 @@ const Heart = ({currentTab}) => {
             }}
             register={register}
             errors={errors}
-            placeholder={"Serum Cholestoral"}
+            placeholder={"Serum cholesterol in milligrams per deciliter (mg/dL). Range: 126 to 564 mg/dL"}
           />
           <CustomInputField
             className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
@@ -115,7 +116,7 @@ const Heart = ({currentTab}) => {
             }}
             register={register}
             errors={errors}
-            placeholder={"Serum Cholestoral"}
+            placeholder={"Total proteins in the blood, measured in grams per deciliter (g/dL). Range: 2.7 to 9.6 g/dL"}
           />
 
           <CustomDropDownSelect
@@ -131,7 +132,7 @@ const Heart = ({currentTab}) => {
             label={"Fasting Blood Sugar"}
             dropdown={fastingBloodSugar}
             errors={errors}
-            placeholder="Select Fasting Blood Sugar"
+            placeholder="Select Fasting blood sugar"
           />
 
           <CustomDropDownSelect

@@ -50,6 +50,8 @@ const Malaria = ({ currentTab }) => {
 
   return (
     <div className="mt-10">
+    <p className="p-7">Malaria is a life-threatening disease caused by parasites from infected Anopheles mosquitoes. It can cause fever, chills, and flu-like symptoms, leading to severe complications and death if not treated properly. The Lister Hill National Center for Biomedical Communications (LHNCBC) has developed a dataset for image processing, featuring thin blood smear slide images, used for malaria detection. This dataset aids in developing machine learning models to automatically detect and classify malaria-infected cells, facilitating rapid and accurate diagnoses.</p>
+    <br/>
       <Container maxWidth="sm">
         <Box pb={3}>
           <Stack spacing={2}>

@@ -52,6 +52,7 @@ const Fracture = ({currentTab}) => {
 
   return (
     <div className="mt-10">
+    <p className="p-7">Fractures are medical conditions where bone continuity breaks due to high-force impact, stress, or weakening conditions like osteoporosis. Kaggle's "Bone Fracture Detection using X-rays" dataset aids in automatic bone fracture detection using X-ray images. This dataset trains models to identify and classify fractures, improving diagnostic tools in medical imaging and enhancing fracture detection accuracy and efficiency.</p>
       <Container maxWidth="sm">
         <Box pb={3}>
           <Stack spacing={2}>

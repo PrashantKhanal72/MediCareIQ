@@ -40,6 +40,7 @@ const Diabiates = ({currentTab}) => {
         onSubmit={handleSubmit(onSubmit)} // Handling form submission
       >
         <div className="flex flex-col gap-3">
+        <p>Diabetes is a chronic condition causing elevated blood glucose levels due to insufficient insulin production. Type 1 occurs when the immune system attacks insulin-producing cells, while Type 2 is more common due to lifestyle factors. Managing diabetes involves monitoring glucose levels, maintaining a balanced diet, and medication.</p>
           <CustomInputField
             className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
             type="number"
@@ -54,7 +55,7 @@ const Diabiates = ({currentTab}) => {
             }}
             register={register}
             errors={errors}
-            placeholder={"No. of Pregnencies"}
+            placeholder={"Number of times the individual has been pregnant, ranges from 0 to 17"}
           />
           <CustomInputField
             className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
@@ -70,7 +71,7 @@ const Diabiates = ({currentTab}) => {
             }}
             register={register}
             errors={errors}
-            placeholder={"Glucose Level"}
+            placeholder={"The plasma glucose concentration a few hours after fasting, ranges from 50 to 199 mg/dL"}
           />
 
           <CustomInputField
@@ -87,7 +88,7 @@ const Diabiates = ({currentTab}) => {
             }}
             register={register}
             errors={errors}
-            placeholder={"Current Blood Pressure"}
+            placeholder={"Diastolic blood pressure (mm Hg), ranges from 40 to 122 mm Hg"}
           />
           <CustomInputField
             className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
@@ -103,7 +104,7 @@ const Diabiates = ({currentTab}) => {
             }}
             register={register}
             errors={errors}
-            placeholder={"BMI"}
+            placeholder={"Body mass index (weight in kg/(height in m)^2), ranges from 0 to 67.1 kg/m^2 "}
           />
           <CustomInputField
             className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
@@ -119,7 +120,7 @@ const Diabiates = ({currentTab}) => {
             }}
             register={register}
             errors={errors}
-            placeholder={"Diabetes Pedigree Function"}
+            placeholder={"A function that scores the likelihood of diabetes based on family history, ranges from 0.078 to 2.420"}
           />
           <CustomInputField
             className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
@@ -135,7 +136,7 @@ const Diabiates = ({currentTab}) => {
             }}
             register={register}
             errors={errors}
-            placeholder={"Age"}
+            placeholder={"Age of the individual in years, ranges from 21 to 81 years"}
           />
           <CustomInputField
             className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
@@ -151,7 +152,7 @@ const Diabiates = ({currentTab}) => {
             }}
             register={register}
             errors={errors}
-            placeholder={"Albumin and Globulin Ratio"}
+            placeholder={"(A/G ratio) is a blood test metric used to assess the balance between albumin and globulin proteins, ranges from 1.1 to 2.5."}
           />
         </div>
 

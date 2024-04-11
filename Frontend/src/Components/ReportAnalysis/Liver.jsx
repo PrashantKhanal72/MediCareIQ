@@ -34,6 +34,7 @@ const Liver = ({ currentTab }) => {
 
   return (
     <div className=" h-full w-full flex flex-col px-12  mt-12">
+    <p>It is aimed as identifying individuals with liver disease through various biochemical and clinical parameters. It doesn't target a specific liver condition but rather discerns the presence of liver disease in general. Key indicators in the dataset include bilirubin levels, liver enzyme levels, and protein levels in the blood, which are critical for diagnosing and monitoring liver health.</p>
       <form
         className="flex gap-[20px] w-full max-w-[1000px] p-6 bg-primary flex-col rounded-2xl"
         onSubmit={handleSubmit(onSubmit)} // Handling form submission
@@ -48,12 +49,12 @@ const Liver = ({ currentTab }) => {
             validation={{
               required: {
                 value: true,
-                message: "Blood Pressure is required",
+                message: "Total Bilirubin is required",
               },
             }}
             register={register}
             errors={errors}
-            placeholder={"Blood Pressure"}
+            placeholder={"Total bilirubin in the blood, measured in milligrams per deciliter (mg/dL).Range: 0.4 to 75 mg/dL"}
           />
           <CustomInputField
             className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
@@ -64,12 +65,12 @@ const Liver = ({ currentTab }) => {
             validation={{
               required: {
                 value: true,
-                message: "Specific Gravity is required",
+                message: "Direct Bilirubin is required",
               },
             }}
             register={register}
             errors={errors}
-            placeholder={"Specific Gravity"}
+            placeholder={"Direct bilirubin in the blood, measured in milligrams per deciliter (mg/dL). Range: 0.1 to 19.7 mg/dL"}
           />
 
           <CustomInputField
@@ -86,7 +87,7 @@ const Liver = ({ currentTab }) => {
             }}
             register={register}
             errors={errors}
-            placeholder={"Alkaline Phosphotase"}
+            placeholder={"Alkaline phosphatase enzyme in the blood, measured in international units per liter (IU/L). Range: 63 to 2110 IU/L"}
           />
           <CustomInputField
             className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
@@ -102,7 +103,7 @@ const Liver = ({ currentTab }) => {
             }}
             register={register}
             errors={errors}
-            placeholder={"Alamine Aminotransferase"}
+            placeholder={"Alanine aminotransferase enzyme in the blood, measured in international units per liter (IU/L). Range: 10 to 2000 IU/L"}
           />
           <CustomInputField
             className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
@@ -118,7 +119,7 @@ const Liver = ({ currentTab }) => {
             }}
             register={register}
             errors={errors}
-            placeholder={"Total Protiens"}
+            placeholder={"Total proteins in the blood, measured in grams per deciliter (g/dL). Range: 2.7 to 9.6 g/dL"}
           />
           <CustomInputField
             className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
@@ -134,7 +135,7 @@ const Liver = ({ currentTab }) => {
             }}
             register={register}
             errors={errors}
-            placeholder={"Albumin"}
+            placeholder={"Albumin protein in the blood, measured in grams per deciliter (g/dL). Range: 0.9 to 5.5 g/dL"}
           />
           <CustomInputField
             className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
@@ -150,7 +151,7 @@ const Liver = ({ currentTab }) => {
             }}
             register={register}
             errors={errors}
-            placeholder={"Albumin and Globulin Ratio"}
+            placeholder={"he ratio of albumin to globulin in the blood, unitless. Range: 0.3 to 2.8"}
           />
         </div>
 

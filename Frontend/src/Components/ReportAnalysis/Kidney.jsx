@@ -35,6 +35,7 @@ const Kidney = ({currentTab}) => {
 
   return (
     <div className=" h-full w-full flex flex-col px-12  mt-12">
+    <p>Chronic Kidney Disease (CKD) is a long-term condition causing gradual kidney function loss. Common causes include diabetes, high blood pressure, and glomerulonephritis. Symptoms include fatigue, swollen limbs, increased urination, and urine protein. Diagnosis involves blood tests, and management involves controlling underlying causes. Advanced stages may require treatment. </p>
       <form
         className="flex gap-[20px] w-full max-w-[1000px] p-6 bg-primary flex-col rounded-2xl"
         onSubmit={handleSubmit(onSubmit)} // Handling form submission
@@ -54,7 +55,7 @@ const Kidney = ({currentTab}) => {
             }}
             register={register}
             errors={errors}
-            placeholder={"Blood Pressure"}
+            placeholder={"Resting Diastolic Blood Pressure in mm Hg ranges from 50 to 180 mmHg"}
           />
           <CustomInputField
             className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
@@ -70,7 +71,7 @@ const Kidney = ({currentTab}) => {
             }}
             register={register}
             errors={errors}
-            placeholder={"Specific Gravity"}
+            placeholder={"Specific Gravity indicating urine density, ranges from 1.005 to 1.025"}
           />
 
           <CustomInputField
@@ -87,7 +88,7 @@ const Kidney = ({currentTab}) => {
             }}
             register={register}
             errors={errors}
-            placeholder={"Albunium"}
+            placeholder={"Albumin level in urine ranges from  0 to 5"}
           />
           <CustomInputField
             className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
@@ -103,7 +104,7 @@ const Kidney = ({currentTab}) => {
             }}
             register={register}
             errors={errors}
-            placeholder={"Blood Sugar Level"}
+            placeholder={"Sugar level in urine, ranges from  0 to 5"}
           />
           <CustomInputField
             className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
@@ -119,7 +120,7 @@ const Kidney = ({currentTab}) => {
             }}
             register={register}
             errors={errors}
-            placeholder={"Red Blood Cells Count"}
+            placeholder={"Red Blood Cells Count 1 for normal and 0 for abnormal"}
           />
           <CustomInputField
             className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
@@ -135,7 +136,7 @@ const Kidney = ({currentTab}) => {
             }}
             register={register}
             errors={errors}
-            placeholder={"Pus Cell Count"}
+            placeholder={"Pus Cell Count  1 for normal and 0 for abnormal "}
           />
           <CustomInputField
             className="!rounded-md !border-[#a1a0a0] !border !font-SF-Pro-text !text-[13px] leading-[18px]"
@@ -151,7 +152,7 @@ const Kidney = ({currentTab}) => {
             }}
             register={register}
             errors={errors}
-            placeholder={"Pus Cell Clumps"}
+            placeholder={"Pus Cell Clumps 1 for present and 0 for not present"}
           />
         </div>
 
