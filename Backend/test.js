@@ -4,7 +4,7 @@ const axios = require("axios"); // Import Axios to make HTTP requests.
 const data = {
   return_url: "https://dev.hiresmart.ai/", // Define the data object that will be sent in the POST request body.
   website_url: "https://dev.hiresmart.ai/", // The URL of the website initiating the payment.
-  amount: "1000", // The amount for the transaction.
+  amount: "500000", // The amount for the transaction.
   purchase_order_id: "afadsfasdf",  // A unique identifier for the purchase order.
   purchase_order_name: "asdfasdfasdf", // A name or description for the purchase order.
 };
