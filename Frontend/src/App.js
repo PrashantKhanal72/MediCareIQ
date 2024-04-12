@@ -25,6 +25,7 @@ import UserDetailPage from "./Pages/UserDetailPage";
 import CallDoctors from "./Pages/CallDoctors";
 import Prescription from "./Pages/Prescription";
 import Success from "./Pages/Success";
+import CallEnd from "./Pages/CallEnd";
 
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
           <Route path="/prescription" element={<Prescription />} />
           <Route path="/call-doctor/:token" element={<CallDoctors />} />
           <Route path="/success" element={<Success/>} />
+          <Route path="/call-end" element={<CallEnd/>} />
         </Routes>
       </Router>
     </div>

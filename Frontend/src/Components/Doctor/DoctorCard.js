@@ -39,7 +39,7 @@ const ModalComp = function ({ open, onClose, doctorDetails }) {
       <Box sx={style}>
         <div className="min-w-[350px]">
           <img
-            src={`https://backend-medicare-9rf2.onrender.com/${doctorDetails?.profileUrl??''}`}
+            src={`https://backend-medicare-7vod.onrender.com/${doctorDetails?.profileUrl??''}`}
             alt={doctorDetails?.first_name ?? ""}
             className="dt-card-img"
           />
@@ -113,7 +113,7 @@ function DoctorCard({ doctorDetails }) {
   return (
     <div className="dt-card">
       <img
-        src={`https://backend-medicare-9rf2.onrender.com/${doctorDetails?.profileUrl??''}`}
+        src={`https://backend-medicare-7vod.onrender.com/${doctorDetails?.profileUrl??''}`}
         alt={doctorDetails?.first_name ?? ""}
         className="dt-card-img !object-cover"
       />

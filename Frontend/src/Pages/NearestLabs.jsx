@@ -49,6 +49,8 @@ const NearestLabs = () => {
     navigate(`/lab/${labId}`);
   };
 
+  console.log("filtered Data", filteredLabs);
+
   return (
     <>
       <Navbar />
@@ -75,45 +77,65 @@ const NearestLabs = () => {
         </Box>
 
         <Box py={5}>
-          <h1>Nearest Labs</h1>
-          <Grid container spacing={2}>
+          {/* <h1>Nearest Labs</h1> */}
+          <div className="grid w-full grid-cols-2 gap-6">
             {filteredLabs.map((lab) => (
-              <Grid item xs={6} md={4} key={lab?.name}>
-                <Card>
-                  <CardContent>
-                    <Typography
-                      variant="h5"
-                      component="div"
-                      onClick={() => navigateToLabDetails(lab?.id)}
-                      style={{ cursor: "pointer" }}
-                    >
-                      {lab.name}
-                    </Typography>
-                    <p>
-                      Opening hours
-                      <p>
-                        <span>{lab?.openingHours}</span>
-                      </p>
+              <div className="p-6 rounded-2xl border-green-600  border-[2px] flex flex-col gap-3">
+                <h1 className="text-[20px] font-bold text-blue-800">
+                  {lab?.name ?? ""}
+                </h1>
+                <div className="flex flex-col gap-2">
+                  <div className="flex flex-col">
+                    <p className="text-[15px] font-medium text-gray-600">
+                      Opening Time
                     </p>
 
-                    <p>
+                    {lab?.openingHours?.split(",").map((item) => {
+                      return (
+                        <p className="font-semibold text-[17px]">{item}</p>
+                      );
+                    })}
+                  </div>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <div className="flex flex-col">
+                    <p className="text-[15px] font-medium text-gray-600">
                       Location
-                      <p>
-                        <span>{lab?.location}</span>
-                      </p>
                     </p>
-
-                    <p>
-                      Phone number
-                      <p>
-                        <span>{lab?.phoneNumber}</span>
-                      </p>
+                    <p className="font-semibold text-[17px]">{lab?.location}</p>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <div className="flex flex-col gap-1">
+                    <p className="text-[15px] font-medium text-gray-600">
+                      Contact
                     </p>
-                  </CardContent>
-                </Card>
-              </Grid>
+                    <p className="font-semibold text-[17px]">
+                      {lab?.phoneNumber ?? ""}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <div className="flex flex-col">
+                    <p className="text-[18px] font-bold text-center text-green-600">
+                      Available Test
+                    </p>
+                    <div className="flex flex-col w-full">
+                      {lab?.availableTests?.map((item) => {
+                        return (
+                          <div className="flex justify-between">
+                            <p className="font-semibold">{item?.testName ?? ""} </p>
+                            <p className="text-[18px]  font-medium">{item?.testPrice ?? ""} </p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
             ))}
-          </Grid>
+          </div>
         </Box>
       </Container>
       <Footer />

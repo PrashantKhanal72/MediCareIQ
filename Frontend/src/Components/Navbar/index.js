@@ -6,11 +6,8 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import Cookies from "js-cookie";
-import { jwtDecode } from "jwt-decode";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
-import { setLogin } from "../../redux-slices/authSlices";
 import { getUserProfile } from "../../Api/user";
 import UserProfile from '../../Assets/user-512.png';
 import { checkUserDetails } from "../../utils/checkUserDetails";

@@ -519,7 +519,10 @@ body {
   }
 }
 .logo img {
-  height: 40px;
+  height: 80px;
+  border-radius: 150px;
+  border: 1px solid black;
+  object-fit: cover;
 }
 
 .hero-section {

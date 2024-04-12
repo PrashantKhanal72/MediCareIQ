@@ -14,6 +14,7 @@ import Grid from "@mui/material/Grid";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { getResourcesList } from "../Api/lab";
 import { Link } from "react-router-dom";
+import YouTube from 'react-youtube';
 
 const style = {
   position: "absolute",
@@ -26,7 +27,15 @@ const style = {
   boxShadow: 24,
   p: 4,
   display: "flex",
-  padding: "12px",
+  padding: 0,
+};
+
+const opts= {
+  height: '340',
+  width: '600',
+  // playerVars: {     it will play video in start automatically
+  //   autoplay: 1,
+  // },
 };
 
 const ModalComp = function ({ open, onClose, openDetails }) {
@@ -40,20 +49,13 @@ const ModalComp = function ({ open, onClose, openDetails }) {
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
-        <div className=" flex flex-col items-center w-full justify-center">
-          <h2 className="dt-card-name ">{`${openDetails[0]?.Name ?? ""}`}</h2>
+        <div className="h-full">
+        <div className=" flex flex-col items-center p-4 w-full justify-center"  >
+          <h2 className="dt-card-name !mt-0 !mb-3 !text-[28px] font-bold">{`${openDetails[0]?.Name ?? ""}`}</h2>
 
-          <div className="w-full flex justify-center my-2  gap-2 items-center">
-            <h1 className="text-[16px] font-semibold">Video : </h1>{" "}
-            <Link
-              className="underline text-blue-500"
-              to={openDetails[0]?.Video ?? ""}
-            >
-              {openDetails[0]?.Video ?? ""}
-            </Link>
-          </div>
+          <YouTube videoId={openDetails[0]?.Video ?? ""} opts={opts} />
 
-          <div class="grid w-full grid-cols-2 gap-4">
+          <div class="grid w-full grid-cols-2 overflow-y-auto h-[200px] mt-2 gap-4">
             <div className="flex flex-col gap-2">
               <h3 className="font-semibold text-center">
                 What the test is about?{" "}
@@ -81,6 +83,7 @@ const ModalComp = function ({ open, onClose, openDetails }) {
               <p className="text-left">{openDetails[0]?.ResultTiming ?? ""} </p>
             </div>
           </div>
+        </div>
         </div>
       </Box>
     </Modal>
@@ -129,7 +132,7 @@ const HealthResources = () => {
       <Navbar />
       <Container>
         <Box py={5}>
-          <h1>Health Resources</h1>
+          {/* <h1 className="text center text-[20px]">Health Resources</h1> */}
           <Grid container spacing={4}>
             {testResource?.map((item, index) => {
               return (

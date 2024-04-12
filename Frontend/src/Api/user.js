@@ -14,6 +14,20 @@ export const getUserProfile = () => {
   };
 };
 
+export const getprofileById = (id) => {
+  return async (dispatch) => {
+    await axiosInstance
+      .get(`/get-single-user/${id}`)
+      .then((res) => {
+        // dispatch(setUser(res.data.profile[0]))
+        console.log(res);
+      })
+      .catch((err) => {
+        dispatch(setUser(null))
+      });
+  };
+};
+
 export const getPrescriptionList = () => {
   return async (dispatch) => {
     await axiosInstance

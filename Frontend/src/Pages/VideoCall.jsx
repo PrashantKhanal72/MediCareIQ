@@ -7,9 +7,11 @@ import Navbar from "../Components/Navbar";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { clearToken } from "../Api/payment";
+import { useNavigate } from "react-router-dom";
+import { getUserProfile, getprofileById } from "../Api/user";
 
 // io( url , options )
-export const socket = io("https://backend-medicare-9rf2.onrender.com", {
+export const socket = io("https://backend-medicare-7vod.onrender.com", {
   path: "/api/v1/socket.io",
   transports: ["websocket"],
   upgrade: false,
@@ -25,6 +27,9 @@ function VidoeCall() {
   const peerConnection = useRef();
   const [mute, setMute] = useState(true);
   const dispatch = useAppDispatch();
+  console.log(remoteVideoRef, "remoteuiei");
+  console.log(localVideoRef, "localRef");
+  const navigate = useNavigate();
 
   const { user } = useAppSelector((state) => state.user);
 
@@ -40,7 +45,7 @@ function VidoeCall() {
 
     socket.on("incomingCall", ({ callerUsername, offer, token }) => {
       setIncomingCall({ callerUsername, offer, token });
-      setShowIncoimgCall(true)
+      setShowIncoimgCall(true);
     });
 
     socket.on("callAccepted", (answer) => {
@@ -73,6 +78,35 @@ function VidoeCall() {
       socket.off("iceCandidate");
     };
   }, [username]); // [dependency]
+
+  // Add this useEffect to handle incoming end call message
+  useEffect(() => {
+    socket.on("endCall", () => {
+      // Close peer connection
+      if (peerConnection.current) {
+        peerConnection.current.close();
+      }
+
+      // Stop local video stream
+      const localStream = localVideoRef?.current?.srcObject;
+      if (localStream) {
+        localStream.getTracks().forEach((track) => track.stop());
+      }
+
+      // Stop remote video stream
+      const remoteStream = remoteVideoRef?.current?.srcObject;
+      if (remoteStream) {
+        remoteStream.getTracks().forEach((track) => track.stop());
+      }
+
+      // Redirect user to appointments page
+      navigate("/call-end", { replace: true });
+    });
+
+    return () => {
+      socket.off("endCall");
+    };
+  }, []);
 
   useEffect(() => {
     handleCallUser(doctorId);
@@ -152,7 +186,7 @@ function VidoeCall() {
       }
     };
 
-    setShowIncoimgCall(false)
+    setShowIncoimgCall(false);
     dispatch(
       clearToken({
         token: incomingCall?.token,
@@ -160,9 +194,41 @@ function VidoeCall() {
       })
     );
   };
-   console.log('incomingCall', incomingCall)
-  // console.log('showIncoming', showIncomingCall)
 
+  const handleEndCall = () => {
+    // Emit end call message to the other user
+    if (incomingCall && incomingCall.callerUsername) {
+      socket.emit("endCall", { targetUsername: incomingCall.callerUsername });
+    }
+
+    // Close peer connection
+    if (peerConnection.current) {
+      peerConnection.current.close();
+    }
+
+    // Stop local video stream
+    const localStream = localVideoRef.current.srcObject;
+    if (localStream) {
+      localStream.getTracks().forEach((track) => track.stop());
+    }
+
+    // Stop remote video stream
+    const remoteStream = remoteVideoRef.current.srcObject;
+    if (remoteStream) {
+      remoteStream.getTracks().forEach((track) => track.stop());
+    }
+
+    // Redirect user to appointments page
+    navigate("/call-end", { replace: true });
+  };
+
+  // useEffect(() => {
+  //   if (incomingCall && incomingCall?.callerUsername) {
+  //     dispatch(getprofileById(incomingCall?.callerUsername));
+  //   }
+  // }, [incomingCall]);
+
+  console.log(onlineUsers, 'incomingCall')
 
   return (
     <>
@@ -177,38 +243,45 @@ function VidoeCall() {
             </li>
           ))}
         </ul> */}
-          {incomingCall && (
-            <div className="w-full flex justify-center">
+          {showIncomingCall && (
+            <div className="bg-black  h-screen w-screen flex items-center justify-center">
               {/* <p>Incoming call from {incomingCall.callerUsername}</p> */}
-              <div className="h-12 w-12 flex items-center gap-4 mt-2 mb-1">
-                <h2 className="text-[16px] whitespace-nowrap leading-[20px] font-semibold">
-                  Incoming Call
-                </h2>
-                <img
-                  onClick={handleAcceptCall}
-                  src={AcceptCall}
-                  alt="end call"
-                  className="h-full w-full hover:cursor-pointer object-fill"
-                />
+              <div className="h-[200px] w-[300px] bg-blue-400 rounded-lg">
+                <div className=" flex items-center flex-col gap-4 justify-center h-full ">
+                  <h2 className="text-[21px]">
+                    {/* {incomingCall?.callerUsername ?? ""} */}
+                  </h2>
+                  <h2 className="text-[16px] text-white whitespace-nowrap leading-[20px] font-semibold">
+                    Incoming Call..
+                  </h2>
+                  <div className="h-12 w-12">
+                    <img
+                      onClick={handleAcceptCall}
+                      src={AcceptCall}
+                      alt="end call"
+                      className="h-full w-full hover:cursor-pointer object-fill"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           )}
         </div>
         <div className="flex flex-1 flex-col px-10  items-center">
           {/* {remoteVideoRef ? ( */}
-            <div className="h-[400px] max-w-[800px]  w-full">
-              <video
-                className="h-full w-full max-w-full"
-                ref={remoteVideoRef}
-                autoPlay
-              ></video>
-            </div>
+          <div className="max-w-[800px]  w-full">
+            <video
+              className="h-[400px] w-full object-fill max-w-full"
+              ref={remoteVideoRef}
+              autoPlay
+            ></video>
+          </div>
           {/* )  */}
         </div>
         <div className="flex gap-10 mt-1 w-full justify-center items-center">
           <div className="max-w-[800px] w-full flex items-center justify-between">
             <div className="flex-1 flex justify-center">
-              <div className="h-12 w-12">
+              <div onClick={handleEndCall} className="h-12 w-12">
                 <img
                   src={EndCall}
                   alt="end call"
@@ -222,7 +295,7 @@ function VidoeCall() {
                 className="h-[150px] max-w-full"
                 ref={localVideoRef}
                 autoPlay
-                muted={mute}
+                muted
               ></video>
             </div>
           </div>
