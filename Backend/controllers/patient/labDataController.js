@@ -52,6 +52,9 @@ const fetchTestData = async (req, res) => {
       `
       SELECT 
           t.TestID,
+          t.Name,
+          t.Video,
+          t.Image,
           t.Description,
           t.ResultTiming,
           tp.HowIsTestDone,
