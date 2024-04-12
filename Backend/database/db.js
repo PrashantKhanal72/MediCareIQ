@@ -14,11 +14,11 @@ const mysql = require("mysql2/promise");
 // });
 
 const pool = mysql.createPool({
-  host: 'bdqulp8gii8wi8ky6j3s-mysql.services.clever-cloud.com', // MySQL server host
+  host: 'bfflry5bb4qjegnsep7u-mysql.services.clever-cloud.com', // MySQL server host
   port:'3306',
-  user: 'ufmibzvobk9w2gfz', 
-  database: 'bdqulp8gii8wi8ky6j3s',
-  password: 'kBHNt1fiw0SY7PtbiDsC', 
+  user: 'ubn9dkoqgxxe2loq', 
+  database: 'bfflry5bb4qjegnsep7u',
+  password: 'vJe4JaodXXngZmBWuZqV', 
   waitForConnections: true, // Wait for connections if all are busy
   connectionLimit: 10, // Maximum number of connections in the pool
   queueLimit: 0 // Maximum number of queued requests (0 for no limit)
