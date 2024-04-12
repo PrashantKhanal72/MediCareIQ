@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { getUserProfile, getprofileById } from "../Api/user";
 
 // io( url , options )
-export const socket = io("https://backend-medicare-7vod.onrender.com", {
+export const socket = io("https://medicareiq.onrender.com", {
   path: "/api/v1/socket.io",
   transports: ["websocket"],
   upgrade: false,

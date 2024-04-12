@@ -3,7 +3,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 // Defines the base URL for all API requests
-export const base = "https://backend-medicare-7vod.onrender.com/api/v1";
+export const base = "https://medicareiq.onrender.com/api/v1";
 
 export const fastApiUrl = "http://127.0.0.1:8000/api/v1";
 
