@@ -67,10 +67,11 @@ const createDoctor = async (req, res) => {
     if (users.length > 0) {
       return res.status(401).json({ message: "User already registerd" });
     }
+    const hashedPassword = await bcrypt.hash(password, 10);
     // Insert new user into 'auth' table.
     const [newUser] = await pool.execute(
       "INSERT INTO auth (email, password, user_type) VALUES (?, ?, ?)",
-      [email, password, "doctor"]
+      [email, hashedPassword, "doctor"]
     );
 
     // Insert new profile into 'profile' table.

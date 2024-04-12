@@ -17,8 +17,10 @@ const login = async (req, res) => {
     // User exists, now compare the password
     // Get the user object.
     const user = users[0];
+    const passwordMatch = await bcrypt.compare(password, user.password);
 
-    if (password !== user.password) {  // Compare the provided password with the stored one.
+    if (!passwordMatch) {
+    // Compare the provided password with the stored one.
       return res.status(401).json({ message: "Incorrect password" });
     }
     console.log(user);
@@ -76,10 +78,12 @@ const register = async (req, res) => {
     if (users.length > 0) {
       return res.status(401).json({ message: "User already registerd" });
     }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
     // Insert a new user into the 'auth' table.
     const [newUser] = await pool.execute(
       "INSERT INTO auth (email, password, user_type) VALUES (?, ?, ?)",
-      [email, password, "patient"]
+      [email, hashedPassword, "patient"]
     );
 
      // Insert a new profile linked to the new user.
@@ -153,9 +157,11 @@ const registerNoProfile = async (req, res) => {
     if (users.length > 0) {
       return res.status(401).json({ message: "User already registerd" });
     }
+    const hashedPassword = await bcrypt.hash(password, 10);
+  
     const [newUser] = await pool.execute(
       "INSERT INTO auth (email, password, user_type) VALUES (?, ?, ?)",
-      [email, password, "patient"]
+      [email, hashedPassword, "patient"]
     );
 
     const [profileResponse] = await pool.execute(
