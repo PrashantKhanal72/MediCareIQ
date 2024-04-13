@@ -1,5 +1,6 @@
 const pool = require("../../database/db");
 const jwt = require("jsonwebtoken"); // Used for generating and verifying JSON Web Tokens (JWT).
+const bcrypt = require("bcrypt");
 
 //Authenticates users and provides a JWT for session management.
 const login = async (req, res) => {
