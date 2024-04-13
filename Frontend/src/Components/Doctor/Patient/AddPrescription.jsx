@@ -14,7 +14,7 @@ const AddPresciption = ({ setIsOpen, patientId }) => {
   const onSubmit = (data) => {
     const postData = {
       patient_id: patientId,
-      description: data?.description ?? "",
+      description: prescription ?? "",
     };
     dispatch(createPrescription(postData, setIsOpen));
   };
