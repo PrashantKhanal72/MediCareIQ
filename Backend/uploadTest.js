@@ -90,10 +90,10 @@ const bloodSugarTestData = {
 
 
 // Invoke the upload function with the sample data, handling the promise to log success or failure.
-uploadBloodSugarTestData(bloodSugarTestData)
-  .then(() => {
-    console.log("Data uploaded successfully.");
-  })
-  .catch((error) => {
-    console.error("Failed to upload data:", error);
-  });
+// uploadBloodSugarTestData(bloodSugarTestData)
+//   .then(() => {
+//     console.log("Data uploaded successfully.");
+//   })
+//   .catch((error) => {
+//     console.error("Failed to upload data:", error);
+//   });
