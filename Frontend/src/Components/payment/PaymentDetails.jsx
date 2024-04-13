@@ -18,7 +18,7 @@ const PaymentDetails = () => {
   if(!user){
     window.location.href = '/login'
   }
-
+  
   return (
     <>
     { user && 
@@ -28,8 +28,8 @@ const PaymentDetails = () => {
         <div className="flex flex-col gap-1">
           <p>Name: {user?.first_name??""} {user?.last_name??''}</p>
           <p>Age: 16</p>
-          <p>Gender: 16</p>
-          <p>Email: test@gmail.com</p>
+          <p>Gender: {user?.gender??""}</p>
+          <p>Email: {user?.email??""}</p>
           <p>Amount: Rs. 800</p>
         </div>
       </div>
