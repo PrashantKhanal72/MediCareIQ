@@ -3,7 +3,9 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 // Defines the base URL for all API requests
-export const base = "https://medicareiq.onrender.com/api/v1";
+//export const base = "https://medicareiq.onrender.com/api/v1";
+
+export const base = "http://localhost:3001/api/v1";
 
 export const fastApiUrl = "http://127.0.0.1:8000/api/v1";
 
@@ -15,6 +17,8 @@ export const fastInstance = axios.create({
     "Content-Type" : "application/json; charset=utf-8"
    }
 })
+
+
 
 // Main Axios instance for regular backend with JSON preferences
 const axiosInstance = axios.create({

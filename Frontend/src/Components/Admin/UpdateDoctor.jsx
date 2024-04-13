@@ -49,7 +49,7 @@ const UpdateDoctor = ({ setIsOpen, updateData }) => {
                 ...updateData, 
                 ...data
         }
-    dispatch(updateDoctorAccount(updateData?.auth_id, datas, setIsOpen));
+    dispatch(updateDoctorAccount(updateData?.profile_id, datas, setIsOpen));
   };
 
   useEffect(()=> {

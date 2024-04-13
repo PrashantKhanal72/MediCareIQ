@@ -1,4 +1,5 @@
 const pool = require("../../database/db");
+const bcrypt = require("bcrypt");
 
 // Get all user profiles from the database
 const getAllUsers = async (req, res) => {
@@ -155,7 +156,7 @@ const updateDoctorProfile = async (req, res) => {
       doctor_type,
       id,
     ]);
-
+   
     if (result.affectedRows > 0) {
       // If profile updated successfully, send HTTP status 200.
       res.status(200).send({ message: "Profile updated successfully" });
