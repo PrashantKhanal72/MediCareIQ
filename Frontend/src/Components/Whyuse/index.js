@@ -25,31 +25,31 @@ function Whyuse() {
       <div className="info-cards-content">
         <InformationCard
           title="Verified Doctors"
-          description="Discover peace of mind by connecting with certified healthcare professionals, ensuring your health is in reliable hands."
+          description="Connect with confidence! Our platform grants you access to a network of verified medical professionals. Schedule your virtual visit and experience healthcare that's trustworthy, transparent, and tailored to your needs."
           img={verifiedDoctor}
         />
 
         <InformationCard
           title="Save Time and Money"
-          description=" Revolutionize your healthcare experience, saving precious time and resources through our efficient and cost-effective solutions."
+          description="Our revolutionary platform is designed to streamline your healthcare experience, where you can seamlessly schedule dual appointments with a physician and a specialist in one go. With a single payment, MediCareIQ simplifies your healthcare journey, ensuring you receive comprehensive care without the hassle of multiple transactions."
           img={saveTime}
         />
 
         <InformationCard
           title="Analyze Report"
-          description="Empower yourself with detailed insights from thorough report analysis, making informed decisions about your well-being."
+          description="Take control of your health with our smart report analysis. Our platform translates complex medical data into clear, actionable insights. Stay informed, stay ahead, and start making decisions that lead to a healthier you."
           img={analyzeReport}
         />
 
         <InformationCard
           title="Find Lab Centers"
-          description="Navigate seamlessly to nearby lab facilities, ensuring convenient access for all your diagnostic needs."
+          description="Discover the convenience of easy-access lab centers. Our intuitive platform guides you to nearby facilities, ensuring that your diagnostic needs are met with ease and efficiency."
           img={labs}
         />
 
         <InformationCard
           title="Health Resources"
-          description="Explore a diverse array of health-related information and resources, empowering you to take proactive steps towards a healthier lifestyle."
+          description="Dive into a curated collection of health resources. Whether you're looking to understand a diagnosis or seeking wellness tips, our rich library is your companion in cultivating a more informed, healthier lifestyle."
           img={healthResources}
         />
       </div>
