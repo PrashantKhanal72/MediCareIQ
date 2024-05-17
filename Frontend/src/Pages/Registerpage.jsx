@@ -18,7 +18,8 @@ const Registerpage = () => {
   const {
     register,
     formState: { errors },
-    handleSubmit
+    handleSubmit,
+    watch
   } = useForm();
 
 
@@ -190,6 +191,13 @@ const Registerpage = () => {
                 required: {
                   value: true,
                   message: "Confirm Password is required",
+                },
+                validate: {
+                  samePassword: (value) => {
+                    if (watch("password") != value) {
+                      return "password did not match.";
+                    }
+                  },
                 },
               }}
               register={register}

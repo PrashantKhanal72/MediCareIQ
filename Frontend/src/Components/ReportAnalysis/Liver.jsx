@@ -169,7 +169,7 @@ const Liver = ({ currentTab }) => {
         </button>
       </form>
       {
-        prediction ? <h1 className={`!py-0 text-[20px] font-semibold ${prediction === 'High' ? 'text-red-600': 'text-yellow-500' }`}>Your chances of getting diesease is {prediction}</h1> : <></>
+        prediction ? <h1 className={`!py-0 text-[20px] font-semibold ${prediction === 'High' ? 'text-red-600': 'text-yellow-500' }`}>Your chances of getting Liver diesease is {prediction}</h1> : <></>
       }
     </div>
   );

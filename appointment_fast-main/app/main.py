@@ -4,6 +4,7 @@ from .api.api_v1.router import api_router
 from .models import ModelLoader,PKLModelLoader
 from .api.api_v1.endpoints import image_inference, kidney_inference,liver_inference,dibetes_inference,heart_inference
 
+# Create an instance of FastAPI.
 app = FastAPI()
 
 # Added CORS Middleware
@@ -15,7 +16,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
+# Define an event handler for the 'startup' event that runs asynchronous function at app startup.
+# This is done at startup to avoid latency on the first request.
 @app.on_event("startup")
 async def startup_event():
     ModelLoader.load_model("fracture", "app/mlmodels/fracture_model.h5")
@@ -28,7 +30,7 @@ async def startup_event():
 # Include the routers from the api_v1 
 app.include_router(api_router, prefix="/api/v1")
 
-
+# Include routers for different inference endpoints, setting a common path prefix for all.
 app.include_router(image_inference.router, prefix="/api/v1")
 app.include_router(kidney_inference.router, prefix="/api/v1")
 app.include_router(liver_inference.router, prefix="/api/v1")

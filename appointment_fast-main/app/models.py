@@ -10,10 +10,6 @@ class ModelLoader:
             cls.models[model_name] = tf.keras.models.load_model(model_path)
         return cls.models[model_name]
 
-# Example usage
-# ModelLoader.load_model("model1", "path/to/model1.h5")
-# ModelLoader.load_model("model2", "path/to/model2.h5")
-
 
 
 class PKLModelLoader:
@@ -30,8 +26,4 @@ class PKLModelLoader:
         else:
             print(f"Model {model_name} is already loaded.")
         return cls.models[model_name]
-
-# Example usage (uncomment and modify the path as needed)
-# if __name__ == "__main__":
-#     svm_model = ModelLoader.load_model("svm_model", "path/to/your/svm_model.pkl")
 

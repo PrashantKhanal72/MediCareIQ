@@ -107,7 +107,7 @@ io.on("connection", (socket) => {
     io.to(callerSocketId).emit("callAccepted", data.answer); // Notify caller that call was accepted.
   });
   
-  // Add this event handler to your existing Socket.IO server code
+  // Add this event handler to  existing Socket.IO server code
   socket.on("endCall", (data) => {
     const targetSocketId = onlineUsers[data.targetUsername];
     io.to(targetSocketId).emit("endCall");

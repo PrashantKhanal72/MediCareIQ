@@ -15,7 +15,7 @@ const getMyPatientList = async (req, res) => {
      // Iterate over each patient to fetch their prescriptions in parallel using Promise.all.
     const patientWithPrescriptions = await Promise.all(
       patients.map(async (row) => {
-        // For each patient, get their prescriptions from the database where the doctor_id and patient_id match.
+        // For each patient, get their prescriptions from the database.
         const [prescription] = await pool.execute(
           "SELECT * FROM prescription WHERE doctor_id = ? AND patient_id = ?",
           [profile_id, row.profile_id]

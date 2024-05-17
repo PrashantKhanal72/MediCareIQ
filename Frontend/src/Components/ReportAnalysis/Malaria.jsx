@@ -37,8 +37,8 @@ const Malaria = ({ currentTab }) => {
 
   useEffect(() => {
     if (malariaPredict !== null) {
-      if (malariaPredict === 1) setPrediction("High");
-      else if (malariaPredict === 0) setPrediction("Low");
+      if (malariaPredict === 1) setPrediction("Low");
+      else if (malariaPredict === 0) setPrediction("High");
     } else {
       setPrediction("");
     }
@@ -89,7 +89,7 @@ const Malaria = ({ currentTab }) => {
             prediction === "High" ? "text-red-600" : "text-yellow-500"
           }`}
         >
-          Your chances of getting diesease is {prediction}
+          Your chances of getting Malaria is {prediction}
         </h1>
       ) : (
         <></>
