@@ -16,6 +16,7 @@ router.post("/login", login);
 // Route for user registration with profile image upload.
 // 'upload.single('profileImage')' middleware processes the profile image upload.
 router.post("/register",upload.single('profileImage'), register);
+
  // Route for user registration without creating a profile.
 router.post("/register-no-profile", registerNoProfile);
 

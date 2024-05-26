@@ -1,6 +1,6 @@
 const pool = require("../../database/db");
 
-// Define an asynchronous function to retrieve all appointments for the logged-in doctor.
+//  function to retrieve all appointments for the logged-in doctor.
 const getAllAppointments = async (req, res) => {
   try {
      // Extract the user ID of the doctor from the request object

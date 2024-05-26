@@ -33,7 +33,7 @@ async function insertLabData(labData) {
   }
 }
 
-// Array containing sample data for labs and their respective tests to be inserted into the database.
+// Array containing data for labs and their respective tests to be inserted into the database.
 const labData = [
   {
     id: 1,

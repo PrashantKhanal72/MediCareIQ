@@ -10,13 +10,14 @@ import { clearToken } from "../Api/payment";
 import { useNavigate } from "react-router-dom";
 import { getUserProfile, getprofileById } from "../Api/user";
 
-// io( url , options )
+// Initialize Socket.io connection
 export const socket = io("https://medicareiq.onrender.com", {
   path: "/api/v1/socket.io",
   transports: ["websocket"],
-  upgrade: false,
+  upgrade: false, // Disable upgrade to other transports
 });
 
+// Main function component for video calling
 function VidoeCall() {
   const [username, setUsername] = useState("");
   const [onlineUsers, setOnlineUsers] = useState([]);
@@ -31,27 +32,32 @@ function VidoeCall() {
   console.log(localVideoRef, "localRef");
   const navigate = useNavigate();
 
+  // Access the current user from Redux state
   const { user } = useAppSelector((state) => state.user);
 
   console.log("user", user);
 
-  const { doctorId, token } = useParams();
+  const { doctorId, token } = useParams(); // Access URL parameters
 
+  // useEffect to handle socket events for updating online users and incoming calls
   useEffect(() => {
+    // Listen for online users update
     socket.on("updateOnlineUsers", (users) => {
       console.log("Online users", users);
-      setOnlineUsers(users);
+      setOnlineUsers(users); // Update online users state
     });
 
+    // Listen for incoming call
     socket.on("incomingCall", ({ callerUsername, offer, token }) => {
-      setIncomingCall({ callerUsername, offer, token });
-      setShowIncoimgCall(true);
+      setIncomingCall({ callerUsername, offer, token });// Set incoming call details
+      setShowIncoimgCall(true); // Show the incoming call UI
     });
 
+    // Listen for call acceptance
     socket.on("callAccepted", (answer) => {
-      const remoteDescription = new RTCSessionDescription(answer);
+      const remoteDescription = new RTCSessionDescription(answer); // Create remote description from answer
       peerConnection.current
-        .setRemoteDescription(remoteDescription)
+        .setRemoteDescription(remoteDescription) // Set remote description on peer connection
         .then(() => {
           console.log("Remote description set successfully");
         })
@@ -60,10 +66,11 @@ function VidoeCall() {
         });
     });
 
+     // Listen for ICE candidates
     socket.on("iceCandidate", (candidate) => {
-      const iceCandidate = new RTCIceCandidate(candidate);
+      const iceCandidate = new RTCIceCandidate(candidate); // Create ICE candidate from received candidate
       peerConnection.current
-        .addIceCandidate(iceCandidate)
+        .addIceCandidate(iceCandidate) // Add ICE candidate to peer connection
         .then(() => {
           console.log("Ice candidate added successfully");
         })
@@ -71,16 +78,18 @@ function VidoeCall() {
           console.error("Error adding ice candidate:", error);
         });
     });
+    // Cleanup socket event listeners on component unmount
     return () => {
       socket.off("updateOnlineUsers");
       socket.off("incomingCall");
       socket.off("callAccepted");
       socket.off("iceCandidate");
     };
-  }, [username]); // [dependency]
+  }, [username]); // Dependency array to re-run effect when username changes
 
-  // Add this useEffect to handle incoming end call message
+  // useEffect to handle incoming end call message
   useEffect(() => {
+    // Listen for end call message
     socket.on("endCall", () => {
       // Close peer connection
       if (peerConnection.current) {
@@ -99,19 +108,21 @@ function VidoeCall() {
         remoteStream.getTracks().forEach((track) => track.stop());
       }
 
-      // Redirect user to appointments page
+      // Redirect user to call end page
       navigate("/call-end", { replace: true });
     });
-
+ // Cleanup socket event listener for end call on component unmount
     return () => {
       socket.off("endCall");
     };
   }, []);
 
+  // useEffect to initiate call when doctorId changes
   useEffect(() => {
     handleCallUser(doctorId);
   }, [doctorId]);
 
+   // Function to handle calling a user
   const handleCallUser = async (calleeUsername) => {
     const calleeSocketId = onlineUsers.find(
       (user) => user === calleeUsername
@@ -121,27 +132,32 @@ function VidoeCall() {
     //     console.log('Callee is not online');
     //     return;
     // }
-
+    // Get local media stream (video and audio)
     const localStream = await navigator.mediaDevices.getUserMedia({
       video: true,
       audio: true,
     });
-    localVideoRef.current.srcObject = localStream;
+    localVideoRef.current.srcObject = localStream; // Set local video element's source to the media stream
 
+      // Create a new RTCPeerConnection instance
     peerConnection.current = new RTCPeerConnection();
     localStream.getTracks().forEach((track) => {
-      peerConnection.current.addTrack(track, localStream);
+      peerConnection.current.addTrack(track, localStream);  // Add local tracks to peer connection
     });
 
+    // Set handler for remote stream
     peerConnection.current.ontrack = (event) => {
-      remoteVideoRef.current.srcObject = event.streams[0];
+      remoteVideoRef.current.srcObject = event.streams[0]; // Set remote video element's source to the received stream
     };
 
+    // Create an offer and set it as the local description
     const offer = await peerConnection.current.createOffer();
     await peerConnection.current.setLocalDescription(offer);
 
+    // Emit callUser event with callee's username, offer, and token
     socket.emit("callUser", { calleeUsername, offer, token });
 
+     // Handle ICE candidates
     peerConnection.current.onicecandidate = (event) => {
       if (event.candidate) {
         socket.emit("iceCandidate", {
@@ -152,31 +168,38 @@ function VidoeCall() {
     };
   };
 
+  // Function to handle accepting a call
   const handleAcceptCall = async () => {
+    // Get local media stream (video and audio)
     const localStream = await navigator.mediaDevices.getUserMedia({
       video: true,
       audio: true,
     });
-    localVideoRef.current.srcObject = localStream;
+    localVideoRef.current.srcObject = localStream;  // Set local video element's source to the media stream
 
+     // Create a new RTCPeerConnection instance
     peerConnection.current = new RTCPeerConnection();
     localStream.getTracks().forEach((track) => {
-      peerConnection.current.addTrack(track, localStream);
+      peerConnection.current.addTrack(track, localStream); // Add local tracks to peer connection
     });
 
+    // Set handler for remote stream
     peerConnection.current.ontrack = (event) => {
-      remoteVideoRef.current.srcObject = event.streams[0];
+      remoteVideoRef.current.srcObject = event.streams[0]; // Set remote video element's source to the received stream
     };
 
+     // Set remote description with the received offer
     await peerConnection.current.setRemoteDescription(incomingCall.offer);
     const answer = await peerConnection.current.createAnswer();
     await peerConnection.current.setLocalDescription(answer);
 
+     // Emit acceptCall event with caller's username and answer
     socket.emit("acceptCall", {
       callerUsername: incomingCall.callerUsername,
       answer,
     });
 
+      // Handle ICE candidates
     peerConnection.current.onicecandidate = (event) => {
       if (event.candidate) {
         socket.emit("iceCandidate", {
@@ -186,6 +209,7 @@ function VidoeCall() {
       }
     };
 
+    // Hide incoming call UI
     setShowIncoimgCall(false);
     dispatch(
       clearToken({
@@ -195,6 +219,7 @@ function VidoeCall() {
     );
   };
 
+  // Function to handle ending a call
   const handleEndCall = () => {
     // Emit end call message to the other user
     if (incomingCall && incomingCall.callerUsername) {
@@ -218,7 +243,7 @@ function VidoeCall() {
       remoteStream.getTracks().forEach((track) => track.stop());
     }
 
-    // Redirect user to appointments page
+    // Redirect user to end call page
     navigate("/call-end", { replace: true });
   };
 

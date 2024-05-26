@@ -50,7 +50,7 @@ async function uploadBloodSugarTestData(data) {
   }
 }
 
-// Example data object for the blood sugar test to demonstrate how the upload function is used.
+// data object for the blood sugar test to demonstrate how the upload function is used.
 const bloodSugarTestData = {
   Description:
     "A blood sugar test measures the amount of glucose in your blood. This test is used to diagnose and manage diabetes.",
@@ -89,11 +89,3 @@ const bloodSugarTestData = {
 };
 
 
-// Invoke the upload function with the sample data, handling the promise to log success or failure.
-// uploadBloodSugarTestData(bloodSugarTestData)
-//   .then(() => {
-//     console.log("Data uploaded successfully.");
-//   })
-//   .catch((error) => {
-//     console.error("Failed to upload data:", error);
-//   });

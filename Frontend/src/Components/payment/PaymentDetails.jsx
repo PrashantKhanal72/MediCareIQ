@@ -8,7 +8,7 @@ const PaymentDetails = () => {
   const dispatch = useAppDispatch()
 
   const data = {
-    amount: 8000
+    amount: 800
   }
 
   const handlePayment = () => {

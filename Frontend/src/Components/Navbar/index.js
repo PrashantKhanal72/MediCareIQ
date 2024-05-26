@@ -28,13 +28,7 @@ function Navbar() {
   };
 
   const handleChatBtnClick = () => {
-    // if (!isButtonDisabled) {
-    //   toast.info("Experiencing high traffic, Please wait a moment.", {
-    //     position: toast.POSITION.TOP_CENTER,
-    //     onOpen: () => setIsButtonDisabled(true),
-    //     onClose: () => setIsButtonDisabled(false),
-    //   });
-    // }
+   
     navigate('/login')
   };
 

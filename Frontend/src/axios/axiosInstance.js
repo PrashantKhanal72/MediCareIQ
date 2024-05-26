@@ -13,8 +13,8 @@ export const fastApiUrl = "http://127.0.0.1:8000/api/v1";
 export const fastInstance = axios.create({
    baseURL: fastApiUrl,
    headers: {
-    Accept: "application/json",
-    "Content-Type" : "application/json; charset=utf-8"
+    Accept: "application/json", // Accepts JSON responses
+    "Content-Type" : "application/json; charset=utf-8" // Sends data as JSON with UTF-8 encoding
    }
 })
 

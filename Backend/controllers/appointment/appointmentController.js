@@ -1,7 +1,7 @@
 // Import the connection pool from the configured database file.
 const pool = require("../../database/db");
 
-// Define an asynchronous function to create a new appointment in the database.
+//  function to create a new appointment in the database.
 const createAppointment = async (req, res) => {
   try {
     // Extract user_id from the request's user object and other details from the request body.

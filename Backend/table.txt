@@ -80,7 +80,8 @@ CREATE TABLE prescription (
     patient_id INT NOT NULL,
     CONSTRAINT pres_doctor FOREIGN KEY (doctor_id) REFERENCES profile(profile_id),
     CONSTRAINT pres_patient FOREIGN KEY (patient_id) REFERENCES profile(profile_id),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    description VARCHAR(255)
 );
 
 
