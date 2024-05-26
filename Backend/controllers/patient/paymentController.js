@@ -9,8 +9,8 @@ const payForCall = async (req, res) => {
   try {
  
     const data = { // Prepare the payment data for the request.
-      return_url: "http://localhost:3000/success", // URL to which the payment gateway will redirect after payment.
-      website_url: "http://localhost:3000/", // URL of the application.
+      return_url: "https://medi-care-iq.vercel.app/success", // URL to which the payment gateway will redirect after payment.
+      website_url: "https://medi-care-iq.vercel.app/", // URL of the application.
 
       amount: "1000", // Fixed amount for demonstration purposes
       purchase_order_id: "afadsfasdf", // Sample order ID.
