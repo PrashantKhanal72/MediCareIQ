@@ -1,3 +1,4 @@
+require("dotenv").config(); // Load environment variables from the .env file.
 const axios = require("axios"); // Import Axios to make HTTP requests.
 
 // Define the data object that will be sent in the POST request body.
@@ -13,7 +14,7 @@ const data = {
 axios
   .post("https://a.khalti.com/api/v2/epayment/initiate/", data, {
     headers: {
-      Authorization: "Key dcf686e684d246c9b7433df5df7cb7f0", // Authorization header with an API key.
+      Authorization: `Key ${process.env.KHALTI_SECRET_KEY}`, // Authorization header with an API key.
       "Content-Type": "application/json", // Set the content type of the request to JSON.
     },
   })

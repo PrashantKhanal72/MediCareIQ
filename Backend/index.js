@@ -1,3 +1,5 @@
+// Load environment variables from the .env file before anything else.
+require("dotenv").config();
 // Import express
 const express = require("express"); // Express framework for handling HTTP requests.
 const path = require("path"); // Node.js path module for handling file paths.

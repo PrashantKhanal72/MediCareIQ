@@ -23,7 +23,7 @@ const payForCall = async (req, res) => {
       data,
       {
         headers: { // Set the necessary headers for the request.
-          Authorization: "Key ab096ad365914bbd9983e0e8f8c2396c",
+          Authorization: `Key ${process.env.KHALTI_SECRET_KEY}`,
           "Content-Type": "application/json",
           
         },

@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken"); // Import the JSON Web Token library.
-const secretKey = "secretKey"; // Define a secret key for token encryption/decryption.
+const secretKey = process.env.JWT_SECRET; // Secret key for token encryption/decryption, from environment.
 
 // Middleware to authenticate the token in the request.
 const authenticateToken = (req, res, next) => {
@@ -8,7 +8,7 @@ const authenticateToken = (req, res, next) => {
 
   if (authHeader) {
     // Verify the token using the secret key
-    jwt.verify(authHeader, "secretKey", (err, user) => {
+    jwt.verify(authHeader, secretKey, (err, user) => {
       console.log(user);
       if (err) {
         return res.sendStatus(403); // If token verification fails, send a 403 Forbidden status.
@@ -49,7 +49,7 @@ const isAdmin = (req, res, next) => {
 // Function to get the user ID from the token.
 const getUserIdFromToken = (token) => {
   try {
-    const decoded = jwt.verify(token, "secretKey"); // Decode the token.
+    const decoded = jwt.verify(token, secretKey); // Decode the token.
     
     return decoded.userId;  // Return the user ID from the decoded token.
   } catch (err) {

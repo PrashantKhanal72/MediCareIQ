@@ -1,24 +1,17 @@
+// Load environment variables from the .env file.
+require("dotenv").config();
+
 // Import the mysql2 library with promise support.
 const mysql = require("mysql2/promise");
 
 // Create a connection pool with configuration settings.
-// const pool = mysql.createPool({
-//   host: 'localhost', // MySQL server host
-//   port:'3306',
-//   user: 'root', 
-//   database: 'my_dev_db',
-//   password: '', 
-//   waitForConnections: true, // Wait for connections if all are busy
-//   connectionLimit: 10, // Maximum number of connections in the pool
-//   queueLimit: 0 // Maximum number of queued requests (0 for no limit)
-// });
-
+// Credentials are read from environment variables (see .env.example).
 const pool = mysql.createPool({
-  host: 'bvkzrpaed5rzbqusczlg-mysql.services.clever-cloud.com', // MySQL server host
-  port:'3306',
-  user: 'uroqsxdfadwztnh4', 
-  database: 'bvkzrpaed5rzbqusczlg',
-  password: 'sucSH1dEmIcFvtZGFfzF', 
+  host: process.env.DB_HOST, // MySQL server host
+  port: process.env.DB_PORT || "3306",
+  user: process.env.DB_USER,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
   waitForConnections: true, // Wait for connections if all are busy
   connectionLimit: 10, // Maximum number of connections in the pool
   queueLimit: 0 // Maximum number of queued requests (0 for no limit)

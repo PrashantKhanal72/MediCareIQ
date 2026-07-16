@@ -39,7 +39,7 @@ const login = async (req, res) => {
         profile_id: profile[0].profile_id,
         user_type: user.user_type,
       },
-      "secretKey",
+      process.env.JWT_SECRET,
       {
         expiresIn: "10d", // Token expires in 10 days.
       }
@@ -122,7 +122,7 @@ const register = async (req, res) => {
         profile_id: profileResponse.insertId,
         user_type: "patient",
       },
-      "secretKey",
+      process.env.JWT_SECRET,
       {
         expiresIn: "10d", // Token expiration time
       }
@@ -197,7 +197,7 @@ const registerNoProfile = async (req, res) => {
         profile_id: profileResponse.insertId,
         user_type: "patient",
       },
-      "secretKey",
+      process.env.JWT_SECRET,
       {
         expiresIn: "10d", // Token expiration time
       }
